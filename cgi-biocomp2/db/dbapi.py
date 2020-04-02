@@ -1,22 +1,78 @@
-#!/usr/bin/python3
-"""
-...Comment header goes here...
+import time
+import pymysql.cursors
 
-This is the database API - it needs to access the MySQL database
-"""
+def getEntry(x):
 
-# Add the directory above to the module path to import the config file
-import sys
-sys.path.insert(0, "../")
+    t0 = time.clock()
 
-import config  # Import configuration information (e.g. database connection)
+# Set parameters – to move these to config file
+
+    dbname   = "co001"
+    dbhost   = "localhost"
+    dbuser   = "co001"
+    dbpass   = "nz8mjl6ft"   
+    port     = 3306
+
+# Connect to the database
+    db = pymysql.connect(host=dbhost, port=port, user=dbuser, passwd=dbpass, db=dbname)
+
+    try:
+        
+# Create a cursor and execute the SQL on it - search db on accession number
+        cursor = db.cursor()
+        nrows = cursor.execute("SELECT * FROM chrom6 WHERE accession =%s", x)
+    
+#Using the cursor as iterator, should return one entry as accession unique
+        for data in cursor:
+            gene_id =data[0]
+            accession =data[1]
+            product =data[2]
+            location =data[3]
+            cds =data[4]
+            protein_seq =data[5]
+            dna_seq =data[6]
+
+        t1 = time.clock()
+
+        print("gene_id: ", gene_id,"\naccession:", accession,"\nproduct: ",product,"\nlocation: ",location,"\ncds: ",cds,"\nprotein_seq: ", protein_seq,"\ndna_seq: ", dna_seq,",")
+        print('elapsed time: ', t1-t0)
+
+    except Exception as e:
+        print("Exception occured:{}".format(e));
+
+    finally:
+        cursor.close()
+        db.close()
 
 def getAllEntries():
-    """
-    ...Function comment header goes here...
 
-    This is a dummy function that returns a list of entries. The real version would probably
-    return a list of dictionaries and would access the MySQL database
-    """
+# Set parameters – to move these to config file
 
-    return(['AB000123', 'AB000321', 'AC001564'])
+    dbname   = "co001"
+    dbhost   = "localhost"
+    dbuser   = "co001"
+    dbpass   = "nz8mjl6ft"   
+    port     = 3306
+
+# Connect to the database
+    db = pymysql.connect(host=dbhost, port=port, user=dbuser, passwd=dbpass, db=dbname)
+
+
+    sql = 'SELECT * FROM chrom6'
+    
+# Create a cursor and execute the SQL on it - returns all items in database
+    cursor = db.cursor()
+    cursor.execute(sql)
+
+    data = cursor.fetchone()
+
+    while data is not None:    
+        gene_id =data[0]
+        accession =data[1]
+        product =data[2]
+        location =data[3]
+            
+        print("gene_id: ", gene_id,"\naccession:", accession,"\nproduct: ",product,"\nlocation: ",location,",\n")
+        data = cursor.fetchone()
+
+
