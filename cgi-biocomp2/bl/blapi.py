@@ -10,9 +10,7 @@ Created on Sun Mar 22 22:18:40 2020
 #import config  # Import configuration information 
 
 import dbapi_dummy as dbapi
-
-
-
+import re
 
 def getAllEntries():
     '''
@@ -25,36 +23,41 @@ def getAllEntries():
     
     return(dbapi.getAllEntries())
     
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()    
+  
     
    
-def getEntry(accession, re):
+def getEntry(accession): #remove re for now for testing
     
     '''
     getting gene id and choice of restriction enzyme information from the front end
     will return gene id, accession number, product, location,  protein sequence
     the dna sequence and the codon usage frequency with the total codon usage frequence
-    of chromsome 6#    
+    of chromsome 6
+    
+    >>> getEntry('AB006907')
+    {'gene_id': 'HLA-DQA1', 'accession': 'AB006907', 'product': 'HMC class II surface glycoprotein', 'location': '6p21.3', 'protein_seq': 'MILNKALMLGALALTTVMSPCGGEDIV', 'dna_seq': '<<tag>>ATGATCCTAAACAAAGCTCTGATGCTGGGGGCCCTTGCCCTGACCACCGTGATGAGCCCCTGTGGAGGTGAAGACATTGTGG<<tag>>', 'cds': '1..82', 'freq': {'CCT': '5.06', 'ATT': '1.27', 'TGT': '2.53', 'AGG': '1.27', 'AGA': '1.27', 'CGT': '1.27', 'TAA': '1.27', 'AGC': '2.53', 'GAC': '2.53', 'ACA': '2.53', 'TGA': '7.59', 'ATG': '3.80', 'AAG': '2.53', 'GAT': '3.80', 'AAC': '1.27', 'GGG': '3.80', 'CAT': '1.27', 'CTC': '1.27', 'ACC': '2.53', 'GGT': '1.27', 'TTG': '2.53', 'CCG': '1.27', 'TCT': '1.27', 'GAG': '2.53', 'GGC': '1.27', 'GGA': '1.27', 'TGC': '2.53', 'GTG': '5.06', 'CCC': '5.06', 'CTG': '5.06', 'GCC': '3.80', 'GCT': '2.53', 'ATC': '1.27', 'TCC': '1.27', 'CTA': '1.27', 'TGG': '2.53', 'CAA': '1.27', 'CAC': '1.27', 'CTT': '1.27', 'CCA': '1.27', 'AAA': '2.53', 'GAA': '1.27'}}
     '''
     
-    gene_record = dbapi.getEntry("accession" = accession)
+    gene_record = dbapi.getEntry(accession)
+    
+   
 #formating cds coming from database-maynot needed, depending on whether data has been cleaned up to only contain 
 #coding region in rage of numbers i the pre-agreed format. For example 1..82
-    for i in cds: 
-        cds = [i.replace('<', '') for i in i]
-        cds = [i.replace('>', '') for i in i]
-        cds = [i.replace('complement(', '') for i in i]
-        cds = [i.replace('join(', '') for i in i]
-        cds = [i.replace(')', '') for i in i]         
-        cds = cds.pop(0)   
-        coding_dna = re.compile(r'\d+')  
-        coding_dna = coding_dna.findall(cds)
-        cds = re.sub(r'\w+\d+\.\d+:','',cds)
+    
+    cds = [gene_record['cds']]
+    cds = [cds.replace('<', '') for cds in cds]
+    cds = [cds.replace('>', '') for cds in cds]
+    cds = [cds.replace('complement(', '') for cds in cds]
+    cds = [cds.replace('join(', '') for cds in cds]
+    cds = [cds.replace(')', '') for cds in cds]         
+    cds = cds.pop(0)   
+    coding_dna = re.compile(r'\d+')  
+    coding_dna = coding_dna.findall(cds)
+    cds = re.sub(r'\w+\d+\.\d+:','',cds)
 
+    dna_seq = gene_record['dna_seq']
     for d in dna_seq:
-        if 'CDS             complement('  in i:        
+        if 'CDS             complement('  in gene_record['cds']:        
             dna_seq = [dna_seq.replace('A', '1') for dna_seq in dna_seq]
             dna_seq = [dna_seq.replace('T', '2') for dna_seq in dna_seq]
             dna_seq = [dna_seq.replace('C', '3') for dna_seq in dna_seq]
@@ -67,19 +70,53 @@ def getEntry(accession, re):
             dna_seq = ''.join(dna_seq)
             
 
-        bases = []
-        for i in coding_dna:
-            base = int(i)
-            bases.append(base)
-            cds_pairs = [bases[i:i + 2] for i in range(0, len(bases), 2)]
-         
-            
-            cds_pairs = cds_pairs[::-1] 
-            for i,k in cds_pairs:   
-                dna_seq = dna_seq.replace(dna_seq[i:], '<<tag>>' + dna_seq[i:]).replace(dna_seq[k:], '<<tag>>' + dna_seq[k:])
+    bases = []
+    for i in coding_dna:
+        base = int(i)
+        bases.append(base)
+        cds_pairs = [bases[i:i + 2] for i in range(0, len(bases), 2)]
+        cds_pairs = cds_pairs[::-1]
         
+    cds_in_dna = ''
+        
+    for start,end in cds_pairs:
+        start = start-1         
+        cds_in_dna += dna_seq[start:end]
+        dna_seq = dna_seq[:start]+ '<<tag>>' + dna_seq[start:end]+ '<<tag>>' + dna_seq[end:]
+
+#calculating cds codon frequency
+    codon_in_gene = []
+    
+    for n in range(len(cds_in_dna) - 3):
+        codon = cds_in_dna[n: n + 3]
+        codon_in_gene.append(codon)
+    
+    len_seq = len(codon_in_gene)
+                
+    codon_dict = {}    
+    for i in set(codon_in_gene):
+        if i in codon_dict.keys():
+            codon_dict[i] += codon_in_gene.count(i)
+        else:
+            codon_dict[i] = codon_in_gene.count(i) 
+
+    codon_freq = {}
+
+    for i in codon_dict:
+        codon_freq[i] = '{0:.2f}'.format(((codon_dict[i]))/len_seq*100) 
+   
+    r_gene_record = {}
+
+    key = ['gene_id','accession','product','location','protein_seq','dna_seq','cds','freq']  
+    value = [gene_record['gene_id'], gene_record['accession'], gene_record['product'],\
+             gene_record['location'],gene_record['protein_seq'], dna_seq, cds, codon_freq]
+    
+    r_gene_record = dict(zip(key,value))
         
     
     return(r_gene_record)
+    
 
-#'''
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()  
