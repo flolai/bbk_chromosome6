@@ -23,8 +23,11 @@ import sys
 sys.path.insert(0, "../db/")
 sys.path.insert(0, "../")
 
-import dbapi   # Import the database api
+#import dbapi   # Import the database api
 #import config  # Import configuration information 
+
+import dbapi_dummy as dbapi
+import re
 
 def getAllEntries():
     '''
