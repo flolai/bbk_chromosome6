@@ -19,11 +19,12 @@ total_codon_freq = {'AAA': '3.73','AAC': '1.66','AAG': '1.96','AAT': '2.17',
  'TCG': '0.91','TCT': '2.20','TGA': '1.78','TGC': '0.79','TGG': '1.49',
  'TGT': '1.99','TTA': '2.22','TTC': '1.99','TTG': '1.64','TTT': '3.80'}
 
-#import dbapi   # Import the database api
+import dbapi   # Import the database api
 #import config  # Import configuration information 
 
-import dbapi_dummy as dbapi
-import re
+import sys
+sys.path.insert(0, "../db/")
+sys.path.insert(0, "../")
 
 def getAllEntries():
     '''
