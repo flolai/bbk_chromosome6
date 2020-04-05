@@ -5,6 +5,19 @@ Created on Sun Mar 22 22:18:40 2020
 
 @author: florence
 """
+total_codon_freq = {'AAA': '3.73','AAC': '1.66','AAG': '1.96','AAT': '2.17',
+ 'ACA': '1.96','ACC': '1.58','ACG': '0.92','ACT': '1.78','AGA': '2.20',
+ 'AGC': '0.77','AGG': '1.70','AGT': '1.79','ATA': '1.91','ATC': '1.28',
+ 'ATG': '1.43','ATT': '2.19','CAA': '1.61','CAC': '1.51','CAG': '1.45',
+ 'CAT': '1.42','CCA': '1.49','CCC': '1.39','CCG': '0.86','CCT': '1.69',
+ 'CGA': '0.91','CGC': '0.28','CGG': '0.86','CGT': '0.92','CTA': '1.29',
+ 'CTC': '1.74','CTG': '1.45','CTT': '1.96','GAA': '1.98','GAC': '1.61',
+ 'GAG': '1.75','GAT': '1.29','GCA': '0.79','GCC': '0.72','GCG': '0.29',
+ 'GCT': '0.77','GGA': '1.75','GGC': '0.72','GGG': '1.40','GGT': '1.58',
+ 'GTA': '1.47','GTC': '1.60','GTG': '1.54','GTT': '1.68','TAA': '2.20',
+ 'TAC': '1.47','TAG': '1.30','TAT': '1.93','TCA': '1.76','TCC': '1.74',
+ 'TCG': '0.91','TCT': '2.20','TGA': '1.78','TGC': '0.79','TGG': '1.49',
+ 'TGT': '1.99','TTA': '2.22','TTC': '1.99','TTG': '1.64','TTT': '3.80'}
 
 #import dbapi   # Import the database api
 #import config  # Import configuration information 
@@ -23,9 +36,7 @@ def getAllEntries():
     
     return(dbapi.getAllEntries())
     
-  
-    
-   
+     
 def getEntry(accession, rez): #remove re for now for testing
     
     '''
@@ -35,7 +46,7 @@ def getEntry(accession, rez): #remove re for now for testing
     of chromsome 6
     
     >>> getEntry('AB006907','EcoRI')
-    {'gene_id': 'HLA-DQA1', 'accession': 'AB006907', 'product': 'HMC class II surface glycoprotein', 'location': '6p21.3', 'protein_seq': 'MILNKALMLGALALTTVMSPCGGEDIV', 'dna_seq': '<tag>ATGATCCTAAACAAAGCTCTGATGCTGGGGGCCCTTGCCCTGACCACCGTGATGAGCCCCTGTGGAGGTGAAGACATTGTGG</tag>', 'cds': '1..82', 'freq': {'CCT': '5.06', 'ATT': '1.27', 'TGT': '2.53', 'AGG': '1.27', 'AGA': '1.27', 'CGT': '1.27', 'TAA': '1.27', 'AGC': '2.53', 'GAC': '2.53', 'ACA': '2.53', 'TGA': '7.59', 'ATG': '3.80', 'AAG': '2.53', 'GAT': '3.80', 'AAC': '1.27', 'GGG': '3.80', 'CAT': '1.27', 'CTC': '1.27', 'ACC': '2.53', 'GGT': '1.27', 'TTG': '2.53', 'CCG': '1.27', 'TCT': '1.27', 'GAG': '2.53', 'GGC': '1.27', 'GGA': '1.27', 'TGC': '2.53', 'GTG': '5.06', 'CCC': '5.06', 'CTG': '5.06', 'GCC': '3.80', 'GCT': '2.53', 'ATC': '1.27', 'TCC': '1.27', 'CTA': '1.27', 'TGG': '2.53', 'CAA': '1.27', 'CAC': '1.27', 'CTT': '1.27', 'CCA': '1.27', 'AAA': '2.53', 'GAA': '1.27'}}
+    {'gene_id': 'HLA-DQA1', 'accession': 'AB006907', 'product': 'HMC class II surface glycoprotein', 'location': '6p21.3', 'protein_seq': 'MILNKALMLGALALTTVMSPCGGEDIV', 'dna_seq': '<TAG>ATGATCCTAAACAAAGCTCTGATGCTGGGGGCCCTTGCCCTGACCACCGTGATGAGCCCCTGTGGAGGTGAAGACATTGTGG</TAG>', 'cds': '1..82', 'freq': {'GGG': '3.80', 'TCT': '1.27', 'TAA': '1.27', 'GAG': '2.53', 'TGG': '2.53', 'ACC': '2.53', 'ACA': '2.53', 'TTG': '2.53', 'AAA': '2.53', 'CTA': '1.27', 'AGA': '1.27', 'CAA': '1.27', 'AAG': '2.53', 'CAT': '1.27', 'TCC': '1.27', 'TGC': '2.53', 'CCA': '1.27', 'ATG': '3.80', 'GAT': '3.80', 'CGT': '1.27', 'GCT': '2.53', 'GGA': '1.27', 'GCC': '3.80', 'TGA': '7.59', 'TGT': '2.53', 'CCG': '1.27', 'GGT': '1.27', 'AAC': '1.27', 'AGG': '1.27', 'GAA': '1.27', 'AGC': '2.53', 'CTG': '5.06', 'GTG': '5.06', 'CTT': '1.27', 'GAC': '2.53', 'CAC': '1.27', 'ATT': '1.27', 'GGC': '1.27', 'ATC': '1.27', 'CCT': '5.06', 'CCC': '5.06', 'CTC': '1.27'}, 'total_freq': {'AAA': '3.73', 'AAC': '1.66', 'AAG': '1.96', 'AAT': '2.17', 'ACA': '1.96', 'ACC': '1.58', 'ACG': '0.92', 'ACT': '1.78', 'AGA': '2.20', 'AGC': '0.77', 'AGG': '1.70', 'AGT': '1.79', 'ATA': '1.91', 'ATC': '1.28', 'ATG': '1.43', 'ATT': '2.19', 'CAA': '1.61', 'CAC': '1.51', 'CAG': '1.45', 'CAT': '1.42', 'CCA': '1.49', 'CCC': '1.39', 'CCG': '0.86', 'CCT': '1.69', 'CGA': '0.91', 'CGC': '0.28', 'CGG': '0.86', 'CGT': '0.92', 'CTA': '1.29', 'CTC': '1.74', 'CTG': '1.45', 'CTT': '1.96', 'GAA': '1.98', 'GAC': '1.61', 'GAG': '1.75', 'GAT': '1.29', 'GCA': '0.79', 'GCC': '0.72', 'GCG': '0.29', 'GCT': '0.77', 'GGA': '1.75', 'GGC': '0.72', 'GGG': '1.40', 'GGT': '1.58', 'GTA': '1.47', 'GTC': '1.60', 'GTG': '1.54', 'GTT': '1.68', 'TAA': '2.20', 'TAC': '1.47', 'TAG': '1.30', 'TAT': '1.93', 'TCA': '1.76', 'TCC': '1.74', 'TCG': '0.91', 'TCT': '2.20', 'TGA': '1.78', 'TGC': '0.79', 'TGG': '1.49', 'TGT': '1.99', 'TTA': '2.22', 'TTC': '1.99', 'TTG': '1.64', 'TTT': '3.80'}}
     '''
     
     gene_record = dbapi.getEntry(accession)
@@ -130,19 +141,16 @@ def getEntry(accession, rez): #remove re for now for testing
    
     r_gene_record = {}
 
-    key = ['gene_id','accession','product','location','protein_seq','dna_seq','cds','freq']  
+    key = ['gene_id','accession','product','location','protein_seq','dna_seq',\
+           'cds','freq', 'total_freq']  
     value = [gene_record['gene_id'], gene_record['accession'], gene_record['product'],\
-             gene_record['location'],gene_record['protein_seq'], dna_seq.upper(), cds, codon_freq]
+             gene_record['location'],gene_record['protein_seq'], dna_seq.upper(), \
+             cds, codon_freq, total_codon_freq]
     
     r_gene_record = dict(zip(key,value))
-        
-    
-    
-    
-    return(r_gene_record)
-    
-print(getEntry('AB011399', 'EcoRI'))
+                
+    return(r_gene_record)    
 
-#if __name__ == '__main__':
-#    import doctest
-#    doctest.testmod()  
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()  
