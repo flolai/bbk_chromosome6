@@ -169,25 +169,25 @@ def getEntry(accession = '', rez = ''):
 #adding tags for restriction enzymes
         
     if rez == 'EcoRI'and 'GAATTC' in dna_seq :  
-        dna_seq = dna_seq.replace('GAATTC', 'G<<RE>>AATTC') 
+        dna_seq = dna_seq.replace('GAATTC', 'G<span class = "re">&star;</span>AATTC') 
         
     if rez == 'BamHI'and 'GGATCC' in dna_seq :  
-        dna_seq = dna_seq.replace('GGATCC', 'G<<RE>>GATCC')
+        dna_seq = dna_seq.replace('GGATCC', 'G<span class = "re">&star;</span>GATCC')
         
     if rez == 'BsuMI'and 'CTCGAG' in dna_seq :  
-        dna_seq = dna_seq.replace('CTCGAG', '<<RE>>CTCGAG') 
+        dna_seq = dna_seq.replace('CTCGAG', '<span class = "re">&star;</span>CTCGAG') 
         
     if rez == 'KpnI'and 'GGTACC' in dna_seq :  
-        dna_seq = dna_seq.replace('GGTACC', 'GGTACC<<RE>>') 
+        dna_seq = dna_seq.replace('GGTACC', 'GGTACC<span class = "re">&star;</span>') 
         
     if rez == 'EcoRV'and 'GATATC' in dna_seq :  
-        dna_seq = dna_seq.replace('GATATC', 'GAT<<RE>>ATC') 
+        dna_seq = dna_seq.replace('GATATC', 'GAT<span class = "re">&star;</span>ATC') 
         
     if rez == 'SmaI'and 'CCCGGG' in dna_seq :  
-        dna_seq = dna_seq.replace('CCCGGG', 'CCC<<RE>>GGG')
+        dna_seq = dna_seq.replace('CCCGGG', 'CCC<span class = "re">&star;</span>GGG')
         
     if rez == 'MscI'and 'TGGCCA' in dna_seq :  
-        dna_seq = dna_seq.replace('TGGCCA', 'TGG<<RE>>CCA')  
+        dna_seq = dna_seq.replace('TGGCCA', 'TGG<span class = "re">&star;</span>CCA')  
       
 
 #calculating cds codon frequency
