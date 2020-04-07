@@ -164,7 +164,7 @@ def getEntry(accession = '', rez = ''):
     for start,end in cds_pairs:
         start = start-1         
         cds_in_dna += dna_seq[start:end]
-        dna_seq = dna_seq[:start]+ '<tag>' + dna_seq[start:end].lower() + '</tag>' + dna_seq[end:]
+        dna_seq = dna_seq[:start]+ '<mark>' + dna_seq[start:end].lower() + '</mark>' + dna_seq[end:]
         
 #adding tags for restriction enzymes
         
@@ -215,10 +215,10 @@ def getEntry(accession = '', rez = ''):
     r_gene_record = {}
 
     key = ['gene_id','accession','product','location','protein_seq','dna_seq',\
-           'cds','freq', 'total_freq']  
+           'cds','freq', 'total_freq', 'rez']  
     value = [gene_record['gene_id'], gene_record['accession'], gene_record['product'],\
              gene_record['location'],gene_record['protein_seq'], dna_seq.upper(), \
-             cds, codon_freq, total_codon_freq]
+             cds, codon_freq, total_codon_freq, rez]
     
     r_gene_record = dict(zip(key,value))
                 
