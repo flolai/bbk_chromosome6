@@ -210,6 +210,7 @@ def getEntry(accession = '', rez = ''):
 
     for i in codon_dict:
         codon_freq[i] = '{0:.2f}'.format(((codon_dict[i]))/len_seq*100) 
+        codon_freq = dict(sorted(codon_freq.items()))
    
     r_gene_record = {}
 
