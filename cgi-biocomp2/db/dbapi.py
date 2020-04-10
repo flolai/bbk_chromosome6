@@ -19,9 +19,9 @@ import time
 import pymysql.cursors
 import sys
 
-import config # import configuration info
+sys.path.append('https://github.com/flolai/bbk_chromosome6/blob/master/cgi-biocomp2/config.py')
 
-sys.path.append('/d/user6/co001/Desktop/BIOCOMP')
+import config # import configuration info
 
 def getEntry(accesion):
 
