@@ -22,8 +22,6 @@ import cgitb
 cgitb.enable()
 
 
-
-
 entries = []
 entries = blapi.getAllEntries()
 html    = htmlutils.header()
