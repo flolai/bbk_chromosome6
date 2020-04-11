@@ -46,12 +46,14 @@ total_codon_freq = {'AAA': '3.73','AAC': '1.66','AAG': '1.96','AAT': '2.17',
 #************************************************************************
 #import libraries
 import sys 
+
+sys.path.insert(0, "../db/")
+sys.path.insert(0, "../")
+
 import re  
 import dbapi   # Import the database api
 import config  # Import configuration information
 
-sys.path.insert(0, "../db/")
-sys.path.insert(0, "../")
 
 #*************************************************************************
 
