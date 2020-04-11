@@ -20,10 +20,10 @@ import time
 import pymysql.cursors
 import sys
 
-import config # import configuration info
-
 sys.path.insert(0, "../db/")
 sys.path.insert(0, "../")
+
+import config # import configuration info
 
 def getEntry(accession):
 
