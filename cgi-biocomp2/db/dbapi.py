@@ -22,7 +22,8 @@ import sys
 
 import config # import configuration info
 
-sys.path.append('/d/user6/co001/Desktop/BIOCOMP')
+sys.path.insert(0, "../db/")
+sys.path.insert(0, "../")
 
 def getEntry(accession):
 
