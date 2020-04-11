@@ -46,10 +46,9 @@ total_codon_freq = {'AAA': '3.73','AAC': '1.66','AAG': '1.96','AAT': '2.17',
 #************************************************************************
 #import libraries
 import sys 
-import dbapi_dummy as dbapi # import dummy database api for testing
 import re  
-#import dbapi   # Import the database api
-#import config  # Import configuration information
+import dbapi   # Import the database api
+import config  # Import configuration information
 
 sys.path.insert(0, "../db/")
 sys.path.insert(0, "../")
@@ -145,7 +144,7 @@ def getEntry(accession = '', rez = ''):
             dna_seq = [dna_seq.replace('2', 'A') for dna_seq in dna_seq]
             dna_seq = [dna_seq.replace('3', 'G') for dna_seq in dna_seq]
             dna_seq = [dna_seq.replace('4', 'C') for dna_seq in dna_seq]
-            dna_seq = dna_seq[::-1]
+            dna_seq = dna_seq[::-1] # reversing the order of the sequence in order to match the cds range
             dna_seq = ''.join(dna_seq)
             
 
