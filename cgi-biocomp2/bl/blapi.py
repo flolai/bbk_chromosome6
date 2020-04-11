@@ -81,8 +81,8 @@ def getAllEntries(accession = '', gene_id = '', product = '',\
     >>>
     '''
     
-    return(dbapi.getAllEntries('accession' = accession, 'gene_id' = gene_id, \
-                               'product' = product , 'location' = location))
+    return(dbapi.getAllEntries(accession = accession, gene_id = gene_id, \
+                               product = product , location = location))
     
 #************************************************************************     
 def getEntry(accession = '', rez = ''): 
