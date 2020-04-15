@@ -52,6 +52,8 @@ entry = {'gene_id': 'HLA-DQA1',
 
 '''
 
+entry = blapi.getEntry()
+
 html  = htmlutils.header()
 html += "<html>\n"
 html += "<head>\n"
@@ -82,13 +84,28 @@ html += "<h2>The protein sequence coded by this gene is listed below: </h2>\n"
 html += entry['protein_seq']
 html += "<h2>The dna sequence is shown below with coding region highlighted, where restriction enzyme choice is given, the region of binding site will also be marked : </h2>\n"
 html += entry['dna_seq']
-
+html += "<h2>Codon usage of current record</h2>"
 html += "<table>\n"
 
 #Table = []
 for key, value in entry['freq'].items():    
     temp = []
     temp.extend([key,value])
+    #Table.append(temp)
+    html += "<tr>"
+    html += "<td>"
+    html += key
+    html += "</td>"
+    html += "<td>"
+    html += value
+    html += "</td>"
+    html += "</tr>"
+    
+html += "</table>\n"
+html += "<h2>Codon usage of all gene in chromosome 6</h2>"
+for k, v in entry['total_freq'].items():    
+    t = []
+    t.extend([k,v])
     #Table.append(temp)
     html += "<tr>"
     html += "<td>"
