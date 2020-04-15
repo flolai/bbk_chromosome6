@@ -82,9 +82,9 @@ def getAllEntries(accession = '', gene_id = '', product = '',\
     '''
     
     accession = '' if accession == None else accession
-    gene_id = '' if accession == None else accession
-    product = '' if accession == None else accession
-    location = '' if accession == None else accession
+    gene_id = '' if gene_id == None else gene_id
+    product = '' if product == None else product
+    location = '' if location == None else location
     
     return(dbapi.getAllEntries(accession = accession, gene_id = gene_id, \
                                product = product , location = location))
