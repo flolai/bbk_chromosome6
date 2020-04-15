@@ -15,8 +15,9 @@ import cgi
 # and the directory above to import the config file
 
 import sys
-sys.path.insert(0, "/d/user6/az001/bl/")
-sys.path.insert(0, "d/user6/az001/WWW/cgi-bin/")
+sys.path.insert(0, "../bl/")
+sys.path.insert(0, "../")
+
 
 import blapi      # Import the Business Logic API
 import htmlutils  # Import HTML utilities
