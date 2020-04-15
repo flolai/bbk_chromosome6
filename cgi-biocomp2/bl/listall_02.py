@@ -23,7 +23,13 @@ import cgi
 import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 
-entries = blapi.getAllEntries()
+accession = form.getvalue("accession")
+gene_id = form.getvalue("gene_id")
+product = form.getvalue("product")
+location = form.getvalue("location")
+
+entries = blapi.getAllEntries(accession = accession, gene_id = gene_id, product = product,\
+             location = location)
 html    = htmlutils.header()
 '''
 entries = [{'gene_id': 'IGF2R',

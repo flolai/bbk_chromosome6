@@ -51,8 +51,9 @@ entry = {'gene_id': 'HLA-DQA1',
   'TTT': '3.80'}, 'rez': 'EcoRI'}
 
 '''
-
-entry = blapi.getEntry()
+accession = form.getvalue("accession")
+rez = form.getvalue("rez")
+entry = blapi.getEntry(accession)
 
 html  = htmlutils.header()
 html += "<html>\n"
