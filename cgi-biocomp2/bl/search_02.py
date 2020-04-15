@@ -23,7 +23,7 @@ import blapi      # Import the Business Logic API
 import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 
-
+'''
 entry = {'gene_id': 'HLA-DQA1',
  'accession': 'AB006907',
  'product': 'HMC class II surface glycoprotein',
@@ -50,7 +50,7 @@ entry = {'gene_id': 'HLA-DQA1',
   'TGC': '0.79','TGG': '1.49','TGT': '1.99','TTA': '2.22','TTC': '1.99','TTG': '1.64',
   'TTT': '3.80'}, 'rez': 'EcoRI'}
 
-
+'''
 
 html  = htmlutils.header()
 html += "<html>\n"

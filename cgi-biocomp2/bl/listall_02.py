@@ -25,7 +25,7 @@ import config     # Import configuration information (e.g. URLs)
 
 entries = blapi.getAllEntries()
 html    = htmlutils.header()
-
+'''
 entries = [{'gene_id': 'IGF2R',
   'accession': 'X83700',
   'product': 'insulin-like growth factor type II receptor',
@@ -46,7 +46,7 @@ entries = [{'gene_id': 'IGF2R',
   'accession': 'X89902',
   'product': 'protein phosphatase 1, regulatory (inhibitor)',
   'location': 'p21.3 mu'}]
-
+'''
 
 html += "<html>\n"
 html += "<head>\n"
