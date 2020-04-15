@@ -75,7 +75,16 @@ def getAllEntries(accession = '', gene_id = '', product = '',\
     -- A list of dictionaries containing Genbank accession numbers, Gene identifiers,
        protein product names adn chromosomal locations within chromosome 6
     
+    
+    >>> getAllEntries()
+    [{'gene_id': 'HLA-DQA1', 'accession': 'AB006907', 'product': 'HMC class II surface glycoprotein', 'location': '6p21.3'}, {'gene_id': 'HLA-DQA1', 'accession': 'AB006908', 'product': 'MHC class II surface glycoprotein', 'location': '6p21.3'}, {'gene_id': 'HLA-DMA', 'accession': 'AB010385', 'product': 'HLA-DMA', 'location': '6p21.3'}]
+    >>>
     '''
+    
+    accession = '' if accession == None else accession
+    gene_id = '' if accession == None else accession
+    product = '' if accession == None else accession
+    location = '' if accession == None else accession
     
     return(dbapi.getAllEntries(accession = accession, gene_id = gene_id, \
                                product = product , location = location))
@@ -109,6 +118,9 @@ def getEntry(accession = '', rez = ''):
     'protein_seq': 'xxx', 'dna_seq': '<tag>xx><<RE>>x</tag>', 'cds':'xxx',
     'freq':{AAA:0..'GGG':0}, 'total_freq':{AAA:0..'GGG':0}}
         
+    
+    >>> getEntry('AB006907','EcoRI')
+    {'gene_id': 'HLA-DQA1', 'accession': 'AB006907', 'product': 'HMC class II surface glycoprotein', 'location': '6p21.3', 'protein_seq': 'MILNKALMLGALALTTVMSPCGGEDIV', 'dna_seq': '<TAG>ATGATCCTAAACAAAGCTCTGATGCTGGGGGCCCTTGCCCTGACCACCGTGATGAGCCCCTGTGGAGGTGAAGACATTGTGG</TAG>', 'cds': '1..82', 'freq': {'GGG': '3.80', 'TCT': '1.27', 'TAA': '1.27', 'GAG': '2.53', 'TGG': '2.53', 'ACC': '2.53', 'ACA': '2.53', 'TTG': '2.53', 'AAA': '2.53', 'CTA': '1.27', 'AGA': '1.27', 'CAA': '1.27', 'AAG': '2.53', 'CAT': '1.27', 'TCC': '1.27', 'TGC': '2.53', 'CCA': '1.27', 'ATG': '3.80', 'GAT': '3.80', 'CGT': '1.27', 'GCT': '2.53', 'GGA': '1.27', 'GCC': '3.80', 'TGA': '7.59', 'TGT': '2.53', 'CCG': '1.27', 'GGT': '1.27', 'AAC': '1.27', 'AGG': '1.27', 'GAA': '1.27', 'AGC': '2.53', 'CTG': '5.06', 'GTG': '5.06', 'CTT': '1.27', 'GAC': '2.53', 'CAC': '1.27', 'ATT': '1.27', 'GGC': '1.27', 'ATC': '1.27', 'CCT': '5.06', 'CCC': '5.06', 'CTC': '1.27'}, 'total_freq': {'AAA': '3.73', 'AAC': '1.66', 'AAG': '1.96', 'AAT': '2.17', 'ACA': '1.96', 'ACC': '1.58', 'ACG': '0.92', 'ACT': '1.78', 'AGA': '2.20', 'AGC': '0.77', 'AGG': '1.70', 'AGT': '1.79', 'ATA': '1.91', 'ATC': '1.28', 'ATG': '1.43', 'ATT': '2.19', 'CAA': '1.61', 'CAC': '1.51', 'CAG': '1.45', 'CAT': '1.42', 'CCA': '1.49', 'CCC': '1.39', 'CCG': '0.86', 'CCT': '1.69', 'CGA': '0.91', 'CGC': '0.28', 'CGG': '0.86', 'CGT': '0.92', 'CTA': '1.29', 'CTC': '1.74', 'CTG': '1.45', 'CTT': '1.96', 'GAA': '1.98', 'GAC': '1.61', 'GAG': '1.75', 'GAT': '1.29', 'GCA': '0.79', 'GCC': '0.72', 'GCG': '0.29', 'GCT': '0.77', 'GGA': '1.75', 'GGC': '0.72', 'GGG': '1.40', 'GGT': '1.58', 'GTA': '1.47', 'GTC': '1.60', 'GTG': '1.54', 'GTT': '1.68', 'TAA': '2.20', 'TAC': '1.47', 'TAG': '1.30', 'TAT': '1.93', 'TCA': '1.76', 'TCC': '1.74', 'TCG': '0.91', 'TCT': '2.20', 'TGA': '1.78', 'TGC': '0.79', 'TGG': '1.49', 'TGT': '1.99', 'TTA': '2.22', 'TTC': '1.99', 'TTG': '1.64', 'TTT': '3.80'}}
     '''
     
     gene_record = dbapi.getEntry(accession) 
@@ -185,7 +197,7 @@ def getEntry(accession = '', rez = ''):
         dna_seq = dna_seq.replace('TGGCCA', 'TGG<span class = "re">&starf;</span>CCA')  
       
 
-#calculating cds codon frequency for current record
+#calculating cds codon frequency
         
     codon_in_gene = []        
     for n in range(len(cds_in_dna) - 3):
@@ -220,3 +232,6 @@ def getEntry(accession = '', rez = ''):
     return(r_gene_record)    
 
 
+#if __name__ == '__main__':
+#    import doctest
+#    doctest.testmod()  
