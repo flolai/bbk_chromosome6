@@ -16,7 +16,7 @@ HTML display as a table
 # and the directory above to import the config file
 import sys
 sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/bl/")
-sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/cgi")
+sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/")
 
 import blapi      # Import the Business Logic API
 import cgi
@@ -48,7 +48,7 @@ entries = [{'gene_id': 'IGF2R',
   'location': 'p21.3 mu'}]
 
 
-html = "<html>\n"
+html += "<html>\n"
 html += "<head>\n"
 html += "<h1>Python cgi to return entries from chromosome 6 database</h1>\n"
 html += "</head>"
@@ -82,7 +82,7 @@ for entry in entries:
 html += "      </ul>\n"
 
 html += "</html>\n"
-#html += htmlutils.footer()
+html += htmlutils.footer()
 
 print(html)
 

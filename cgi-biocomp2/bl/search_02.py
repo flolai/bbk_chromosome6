@@ -52,8 +52,8 @@ entry = {'gene_id': 'HLA-DQA1',
 
 
 
-#html    = htmlutils.header()
-html = "<html>\n"
+html  = htmlutils.header()
+html += "<html>\n"
 html += "<head>\n"
 html += "<h1>Cgi script to return entries of chromosome 6 and adding tags to coding region</h1>\n"
 html += "      <ul>\n"
@@ -108,6 +108,6 @@ html += "      </ul>\n"
 html += "</html>\n"
 
 
-#html += htmlutils.footer()
+html += htmlutils.footer()
 
 print(html)
