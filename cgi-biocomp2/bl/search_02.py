@@ -90,11 +90,10 @@ html += "<br>"
 html += "<h2>Codon usage of current record</h2>"
 html += "<table>\n"
 
-#Table = []
+
 for key, value in entry['freq'].items():    
     temp = []
     temp.extend([key,value])
-    #Table.append(temp)
     html += "<tr>"
     html += "<td>"
     html += key
@@ -103,9 +102,11 @@ for key, value in entry['freq'].items():
     html += value
     html += "</td>"
     html += "</tr>"
+html += "</table>\n"
 
 html += "<h2>Codon usage of all gene in chromosome 6</h2>"   
-html += "</table>\n"
+
+html += "<table>\n"
 for k, v in entry['total_freq'].items():    
     t = []
     t.extend([k,v])
