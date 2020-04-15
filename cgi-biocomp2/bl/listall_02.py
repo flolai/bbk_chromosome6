@@ -16,7 +16,7 @@ HTML display as a table
 # and the directory above to import the config file
 import sys
 sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/bl/")
-sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/")
+sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/cgi")
 
 import blapi      # Import the Business Logic API
 import cgi
@@ -24,7 +24,7 @@ import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 
 entries = blapi.getAllEntries()
-#html    = htmlutils.header()
+html    = htmlutils.header()
 
 entries = [{'gene_id': 'IGF2R',
   'accession': 'X83700',
