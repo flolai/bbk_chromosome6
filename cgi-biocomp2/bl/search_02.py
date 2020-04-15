@@ -111,10 +111,10 @@ for k, v in entry['total_freq'].items():
     #Table.append(temp)
     html += "<tr>"
     html += "<td>"
-    html += key
+    html += k
     html += "</td>"
     html += "<td>"
-    html += value
+    html += v
     html += "</td>"
     html += "</tr>"
     
