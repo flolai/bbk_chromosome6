@@ -15,13 +15,13 @@ HTML display as a table
 
 # Add the bl sub-directory to the module path
 # and the directory above to import the config file
-#import sys
-#sys.path.insert(0, "../bl/")
-#sys.path.insert(0, "../")
+import sys
+sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/bl/")
+sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/")
 
-#import blapi      # Import the Business Logic API
-#import htmlutils  # Import HTML utilities
-#import config     # Import configuration information (e.g. URLs)
+import blapi      # Import the Business Logic API
+import htmlutils  # Import HTML utilities
+import config     # Import configuration information (e.g. URLs)
 
 
 entry = {'gene_id': 'HLA-DQA1',

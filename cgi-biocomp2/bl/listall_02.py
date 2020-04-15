@@ -1,11 +1,11 @@
-
+#!/usr/bin/python3
 """
 Created on Wed Apr  1 22:59:57 2020
 
 @author: florence
 """
 
-#!/usr/bin/python3
+
 """
 ...Comment header goes here...
 This CGI script obtains all the entries from the BL layer and formats them for 
@@ -14,16 +14,16 @@ HTML display as a table
 
 # Add the bl sub-directory to the module path
 # and the directory above to import the config file
-#import sys
-#sys.path.insert(0, "../bl/")
-#sys.path.insert(0, "../")
+import sys
+sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/bl/")
+sys.path.insert(0, "/d/user6/lc001/biocomp2/bbk_chromosome6/cgi-biocomp2/")
 
-#import blapi      # Import the Business Logic API
-#import cgi
-#import htmlutils  # Import HTML utilities
-#import config     # Import configuration information (e.g. URLs)
+import blapi      # Import the Business Logic API
+import cgi
+import htmlutils  # Import HTML utilities
+import config     # Import configuration information (e.g. URLs)
 
-#entries = blapi.getAllEntries()
+entries = blapi.getAllEntries()
 #html    = htmlutils.header()
 
 entries = [{'gene_id': 'IGF2R',
@@ -68,13 +68,13 @@ html += "</tr>"
 
 for entry in entries:
     html += "<tr>"
-    html += "        <td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
+    html += "        <td><a href='/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
             + entry['accession'] + "'>" + entry['accession'] + "</a></td>"
-    html += "        <td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
+    html += "        <td><a href='/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
             + entry['accession'] + "'>" + entry['gene_id'] + "</a></td>"  
-    html += "        <td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
+    html += "        <td><a href='/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
             + entry['accession'] + "'>" + entry['product'] + "</a></td>" 
-    html += "        <td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
+    html += "        <td><a href='/cgi-bin/cgiwrap/lc001/search_02.py?accession=" \
             + entry['accession'] + "'>" + entry['location'] + "</a></td>"        
     html +=        "</tr>\n"
          
