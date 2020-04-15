@@ -23,6 +23,7 @@ import cgi
 import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 
+form = cgi.FieldStorage()
 accession = form.getvalue("accession")
 gene_id = form.getvalue("gene_id")
 product = form.getvalue("product")

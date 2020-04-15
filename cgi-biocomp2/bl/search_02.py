@@ -51,6 +51,7 @@ entry = {'gene_id': 'HLA-DQA1',
   'TTT': '3.80'}, 'rez': 'EcoRI'}
 
 '''
+form = cgi.FieldStorage()
 accession = form.getvalue("accession")
 rez = form.getvalue("rez")
 entry = blapi.getEntry(accession)
