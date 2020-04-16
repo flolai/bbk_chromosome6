@@ -196,8 +196,8 @@ def getEntry(accession = '', rez = ''):
     if rez == 'MscI'and 'TGGCCA' in dna_seq :  
         dna_seq = dna_seq.replace('TGGCCA', 'TGG<span class = "re">&starf;</span>CCA')  
       
-        dna_seq = dna_seq.upper()
-        dna_seq = dna_seq.replace('<SPAN CLASS = "RE">&STARF;</SPAN>', '<span class = "re">&starf;</span>')
+    dna_seq = dna_seq.upper()
+    dna_seq = dna_seq.replace('<SPAN CLASS = "RE">&STARF;</SPAN>', '<span class = "re">&starf;</span>')
 #calculating cds codon frequency
         
     codon_in_gene = []        
