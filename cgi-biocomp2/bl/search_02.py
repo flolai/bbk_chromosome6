@@ -54,7 +54,7 @@ entry = {'gene_id': 'HLA-DQA1',
 form = cgi.FieldStorage()
 accession = form.getvalue("accession")
 rez = form.getvalue("rez")
-entry = blapi.getEntry(accession)
+entry = blapi.getEntry(accession, rez)
 
 html  = htmlutils.header()
 html += "<html>\n"
