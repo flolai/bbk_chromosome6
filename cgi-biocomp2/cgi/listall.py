@@ -3,7 +3,7 @@
 This CGI script  displays summary of the genes in a table, with Genbank Accession, Gene Identifier, Protein product and chromosomal location being the column headers. This CGI script also allows users to select any Genbank Accession cell which will take user to summary page of that gene; summary page will display Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal Location, Coding region-CDS,  DNA sequences-with coding regions highlighted and star indicating restriction enzyme and codon frequency.
 ============
 Author: Maham Ahmad
-Created on 15th April 2020
+Created on 16th April 2020
 """
 #print ("Content-Type: text/html\n")
 
