@@ -176,28 +176,28 @@ def getEntry(accession = '', rez = ''):
 #adding tags for restriction enzymes
         
     if rez == 'EcoRI'and 'GAATTC' in dna_seq :  
-        dna_seq = dna_seq.replace('GAATTC', 'G<span class = "re">&starf;</span>AATTC') 
+        dna_seq = dna_seq.replace('GAATTC', 'G|AATTC') 
         
     if rez == 'BamHI'and 'GGATCC' in dna_seq :  
-        dna_seq = dna_seq.replace('GGATCC', 'G<span class = "re">&starf;</span>GATCC')
+        dna_seq = dna_seq.replace('GGATCC', 'G|GATCC')
         
     if rez == 'BsuMI'and 'CTCGAG' in dna_seq :  
-        dna_seq = dna_seq.replace('CTCGAG', '<span class = "re">&starf;</span>CTCGAG') 
+        dna_seq = dna_seq.replace('CTCGAG', '|CTCGAG') 
         
     if rez == 'KpnI'and 'GGTACC' in dna_seq :  
-        dna_seq = dna_seq.replace('GGTACC', 'GGTACC<span class = "re">&starf;</span>') 
+        dna_seq = dna_seq.replace('GGTACC', 'GGTACC|') 
         
     if rez == 'EcoRV'and 'GATATC' in dna_seq :  
-        dna_seq = dna_seq.replace('GATATC', 'GAT<span class = "re">&starf;</span>ATC') 
+        dna_seq = dna_seq.replace('GATATC', 'GAT|ATC') 
         
     if rez == 'SmaI'and 'CCCGGG' in dna_seq :  
-        dna_seq = dna_seq.replace('CCCGGG', 'CCC<span class = "re">&starf;</span>GGG')
+        dna_seq = dna_seq.replace('CCCGGG', 'CCC|GGG')
         
     if rez == 'MscI'and 'TGGCCA' in dna_seq :  
-        dna_seq = dna_seq.replace('TGGCCA', 'TGG<span class = "re">&starf;</span>CCA')  
+        dna_seq = dna_seq.replace('TGGCCA', 'TGG|CCA')  
       
     dna_seq = dna_seq.upper()
-    dna_seq = dna_seq.replace('<SPAN CLASS = "RE">&STARF;</SPAN>', '<span class = "re">&starf;</span>')
+    dna_seq = dna_seq.replace('|', '<span class = "re">&starf;</span>')
 #calculating cds codon frequency
         
     codon_in_gene = []        
