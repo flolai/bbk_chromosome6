@@ -8,7 +8,7 @@ Coding region-CDS,  DNA sequences-with coding regions highlighted and star indic
 and codon frequency.
 ============
 Author: Maham Ahmad
-Created on 15th April 2020
+Created on 16th April 2020
 """
 import cgi
 #print ("Content-Type: text/html\n")
