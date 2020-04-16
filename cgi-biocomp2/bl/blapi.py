@@ -196,7 +196,8 @@ def getEntry(accession = '', rez = ''):
     if rez == 'MscI'and 'TGGCCA' in dna_seq :  
         dna_seq = dna_seq.replace('TGGCCA', 'TGG<span class = "re">&starf;</span>CCA')  
       
-
+        dna_seq = dna_seq.upper()
+        dna_seq = dna_seq.replace('<SPAN CLASS = "RE">&STARF;</SPAN>', '<span class = "re">&starf;</span>')
 #calculating cds codon frequency
         
     codon_in_gene = []        
@@ -224,7 +225,7 @@ def getEntry(accession = '', rez = ''):
     key = ['gene_id','accession','product','location','protein_seq','dna_seq',\
            'cds','freq', 'total_freq', 'rez']  
     value = [gene_record['gene_id'], gene_record['accession'], gene_record['product'],\
-             gene_record['location'],gene_record['protein_seq'], dna_seq.upper(), \
+             gene_record['location'],gene_record['protein_seq'], dna_seq, \
              cds, codon_freq, total_codon_freq, rez]
     
     r_gene_record = dict(zip(key,value))
