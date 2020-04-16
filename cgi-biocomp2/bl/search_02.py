@@ -121,8 +121,26 @@ for k, v in entry['total_freq'].items():
     
 
 html += "</table>\n"
-
 html += "      </ul>\n"
+html += "<form action = '/cgi-bin/cgiwrap/lc001/search_02.py' method = 'get'>"
+html += "<input type='hidden' id='accession' name='accession' value='" + accession + "'>"
+
+html += """
+	<select name = "rez">
+	<option value = "Restriction enzyme list">Restriction enzyme list</option>
+	<option value = "EcoRI">EcoRI</option>
+	<option value = "BamHI">BamHI</option>
+	<option value = "BsuMI">BsuMI</option>
+	<option value = "KpnI">KpnI</option>
+	<option value = "EcoRV">EcoRV</option>
+	<option value = "SmaI">SmaI</option>
+	<option value = "MscI">MscI</option>
+
+
+	</select>
+	<input type = "submit" value = "Submit"/>
+	</form>
+"""
 
 
 html += "</html>\n"
