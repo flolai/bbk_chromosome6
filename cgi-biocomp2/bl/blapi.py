@@ -91,7 +91,7 @@ def getAllEntries(accession = '', gene_id = '', product = '',\
     
 #************************************************************************     
 def getEntry(accession = '', rez = ''): 
-    
+    rez = '' if rez == None else rez
     '''
     Taking accession number and a choice of restriction enzyme information from 
     the front end. After processing, this function will return Genbank 
