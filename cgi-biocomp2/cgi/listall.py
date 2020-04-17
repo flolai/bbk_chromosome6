@@ -8,7 +8,7 @@ Coding region-CDS,  DNA sequences-with coding regions highlighted and star indic
 and codon frequency.
 ============
 Author: Maham Ahmad
-Created on 16th April 2020
+Created on 17th April 2020
 """
 import cgi
 #print ("Content-Type: text/html\n")
@@ -17,8 +17,8 @@ import cgi
 # and the directory above to import the config file
 
 import sys
-sys.path.insert(0, "../bl/")
-sys.path.insert(0, "../") 
+sys.path.insert(0, "/d/user6/az001/bl/")
+sys.path.insert(0, "/d/user6/az001/db/") 
 
 import blapi      # Import the Business Logic API
 import htmlutils  # Import HTML utilities
@@ -84,7 +84,7 @@ html += "<th>Chromosomal Location</th>"
 html += "</tr>\n"
 for _ in entries:	
 	html += "<tr>\n"
-	html += "<td><a href=\"http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/nextcgi.py\" method=\"get\"id=\"accession\">"+ _['accession']+ "</a></td>" #This href does not work right now
+	html += "<td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/nextcgi.py?accession={}' method='get'>".format(_['accession'])+ _['accession']+ "</a></td>" #Change nextgci.py to search.py to run code
 	html += "<td>"+_['gene_id'] + "</td>"	
 	html += "<td>"+_['product'] + "</td>"
 	html += "<td>"+_['location'] + "</td>"
@@ -93,7 +93,6 @@ for _ in entries:
 	
 html += "</table>\n"
 
-         
 html += "</body>\n"
 html += "</html>\n"
 html += htmlutils.footer()
