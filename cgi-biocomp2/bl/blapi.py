@@ -225,7 +225,3 @@ def getEntry(accession = '', rez = ''):
                 
     return(r_gene_record)    
 
-
-#if __name__ == '__main__':
-#    import doctest
-#    doctest.testmod()  
