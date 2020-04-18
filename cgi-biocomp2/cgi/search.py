@@ -1,23 +1,24 @@
 #!/usr/bin/python3
 """
-This CGI script  displays the search results - a summary page of the gene searched using Genbank Accession,
-Gene Identifier, Protein Product,Chromosomal Location and restriction enzyme.
+This CGI script  displays the search results - a detailed page of the gene searched using Genbank Accession,
+Gene Identifier, Protein Product or Chromosomal Location #and restriction enzyme.#
 ------------------------------------------------------------------------------------------------------------------
-Summary page includes:
+Detail page includes:
 ------------------------------------------------------------------------------------------------------------------
 Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal Location, Coding region-CDS,
 DNA sequences-with coding regions highlighted and star indicating restriction enzyme and codon frequency.
 
 ============
+Program: Search CGI script
 Author: Maham Ahmad
-Created on 17th April 2020
+Date Created: 18 April 2020
 """
 
 # Add the bl sub-directory to the module path
 # and the directory above to import the config file
 import sys
 sys.path.insert(0, "/d/user6/az001/bl/")
-sys.path.insert(0, "/d/user6/az001/db/") #Confif file saved in db folder
+sys.path.insert(0, "/d/user6/az001/db/") #Config file saved in db folder
 
 
 import blapi      # Import the Business Logic API
@@ -46,7 +47,7 @@ html += "<html>\n"
 html += "<head>\n"
 html += "<h1> Results for: </h1>\n"
 html += "<li>"+accession+"</li>\n"
-html+= "<p id=\"demo\"></p>"
+#html+= "<p id=\"demo\"></p>"
 
 
 html += "<style>"
@@ -99,13 +100,20 @@ html += entry['protein_seq']
 html += "</textarea>\n"
 html += "</hr\n>"
 
+enzyme = form.getvalue('enzyme')
+
 #DNA sequence with coding region highlighted
 #DROP DOWN
 html += "<hr\n>"
 html += "<h2>DNA Sequence with coding region highlighted with star indicating restriction enzyme: </h2>\n"
-html += "<form action=\"\" method=\"post\">"#
-html += "<label for='Restriction Enzyme'>Choose a Restrction Enzyme:</label>"
-html += "<select id='enzyme' name= 'enzyme'>"
+html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/rez.py' method='get'>"
+
+html += "<label for='Restriction Enzyme'>Select Genbank Accessiona and Restrction Enzyme:</label>"
+html += "<select id='accession' name= 'accession'>"
+html += "<option disabled selected value> -- select an option -- </option>"
+html += "<option value={}>".format(accession)+ accession+ "</option>"
+html += "</select> "
+html += "<select id='rez' name= 'rez'>"
 html += "<option disabled selected value> -- select an option -- </option>"
 html += "<option value='EcoRI'>EcoRI</option>"
 html += "<option value='BamHI'>BamHI</option>"
@@ -113,21 +121,23 @@ html += "<option value='BsuMI'>BsuMI</option>"
 html += "<option value='KpnI'>KpnI</option>"
 html += "<option value='EcoRV'>EcoRV</option>"
 html += "<option value='SmaI'>SmaI</option>"
-html += "  <option value='MscI'>MscI</option>"
+html += "<option value='MscI'>MscI</option>"
 html += "</select> "
-#html += "<input type=\"submit\" value=\"Submit\">"
+
+html += "<input type='submit' value='Submit'>"
 html += "</form>"
-
-html+= "<button type='button' onclick='myFunction()'>Try it</button>"
-html+= "<p id='demo'></p>"
-
+'''
+#html+= "<button type='button' onclick='myFunction()'>Try it</button>"
+html+= "<p id='rez'></p>"
+rez = form.getvalue('rez')
 html+= "<script>\
 function myFunction() {\
-  var x = document.getElementById('enzyme').value;\
-	document.getElementById('demo').innerHTML = x;\
+  var x = document.getElementById('rez').value;\
+	document.getElementById('rez').innerHTML = x;\
 }\
 </script>"
-
+entry = blapi.getEntry(accession,rez)
+'''
 html += "<div Class {height:auto;} style='width:1000px;font-size: 11px; word-wrap:break-word;'>"
 html += entry['dna_seq']
 html += "</div>"
