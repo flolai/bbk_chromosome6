@@ -124,10 +124,10 @@ def getAllEntries(**kwargs):
     
     gene_records = []
 
-    accession = '%' if kwargs['accession'] == '' else kwargs['accession']
-    product = '%' if kwargs['product'] == '' else kwargs['product']
-    location = '%' if kwargs['location'] == '' else kwargs['location']
-    gene_id = '%' if kwargs['gene_id'] == '' else kwargs['gene_id']
+    accession = '%' if kwargs['accession'] == 'None' else kwargs['accession']
+    product = '%' if kwargs['product'] == 'None' else kwargs['product']
+    location = '%' if kwargs['location'] == 'None' else kwargs['location']
+    gene_id = '%' if kwargs['gene_id'] == 'None' else kwargs['gene_id']
 
 # Get parameters from config file
 
