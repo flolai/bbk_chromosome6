@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
-<!--This is a draft version of gene summary table HTML script, which displays  Gene Identifier, Chromosmal location, Protein Product, Genbank Accession of all the genes in Chromosome 6.  By clicking on desired Genbank Accesion cell, a summary page of that gene will be diplayed. Summary page will include:
+<!--This is a draft version of gene summary table HTML script, which displays  Gene Identifier, Chromosmal location,
+Protein Product and  Genbank Accession of all the genes in Chromosome 6.  By clicking on desired Genbank Accesion cell,
+a detailed page of that gene will be diplayed. Summary page will include:
+
 Genbank Accession,
 Gene Identifier,
 Protein Product,
@@ -11,8 +14,10 @@ DNA sequences-with coding regions highlighted and star indicating restriction en
 Codon frequency.
   
 ============
+============
+Program: Draft Summary HTML 
 Author: Maham Ahmad
-Created on 17th April 2020
+Date Created: 18 April 2020
 -->
 
 <html>
@@ -73,7 +78,8 @@ text-align:center;
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="draftindex.html">Home</a> 
-  <a href="draftsummary.html">Gene Summary</a>
+  <!--<a href="draftsummary.html">Home</a>-->
+  <a href="http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/listallcgi.py">Gene Summary</a>
   <a href="draftsearch.html">Search</a>
 <p>HOME</p>
   
@@ -91,6 +97,8 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 </script>
+
+<!--<a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/listallcgi.py'>List all entries</a>-->
    
 </body>
 </html> 
