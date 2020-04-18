@@ -1,33 +1,65 @@
-#!/usr/bin/python3
-
 """
-This is the python wrapper for the MySQL database. 
+Program: dbapi
+File: dbapi.py
 
-Queries chrom6 database and returns entries to blapi 
+Version: V2.0
+Date Crated: 11-Apr 2020
+Function: Python wrapper for MySQL Genebank chromosome 6 database. Searches databaseand returns
+matching entry details to the blapi.py 
 
-getAllEntries() parameters = accession, location, gene_id, product. Returns list of dictionaries. 
+Description:
+------------
 
-getentry() parameters = accession, returns dictionary
+This program takes Genbank accession number, gene_id, protein product and location from the blapi
+and returns all matching entries from the Genebank database.
+The program contains two functions:
+    getEntry()      - takes accession number as a parameter and returns one entry.
+                      Returns accession number, gene_id, protein, location, DNA sequence
+                      and protein sequence. 
+    getAllEntries() - takes accession, gene_id, protein and or location as a parameter
+                      and returns all matching entries in database. Returns accession,
+                      gene_id, location and product.
+                      If no parameters entered all entries in the database are returned.
 
-Author: Oliver Cant
-Created on March 28th 2020
-
-11th April 2020 Updated get all entries function to allow searching on multiple categories 
+Updates
+-------
+V2 - update to allow searches on gene_id, protein and location.
+    
 """
 
-
-import time
+#***************************************************************************************************
+#import libraries
 import pymysql.cursors
 import sys
 
 sys.path.insert(0, "../db/")
 sys.path.insert(0, "../")
 
-import config # import configuration info
+import config # import configuration information
+#***************************************************************************************************
+
 
 def getEntry(accession):
+    '''
+    Takes accession number from blapi.py, connects to MySQL database and returns accession number,
+    Gene ID, protein, location on chromosome 6, DNA sequence and protein sequence of matching gene
+    bank entry
+    to the blapi.
 
-# Get parameters from config file
+    Parameters
+    ----------
+    accession: this is the genebank accession number that the user has selected in the front end.
+                It is passed from the front end to the blapi which calls this function
+
+    Return
+    -------
+    {'gene_id': 'XXX', 'accession': 'XXX', 'product': 'XXX', 'location': 'XXX', 
+     'cds': 'XXX', 'protein_seq': 'XXX', 'dna_seq': 'XXX'}
+
+    Returns: 'Exception occured: e' if error   
+    '''
+    
+# Get database connection parameters from config file
 
     dbname   = config.dbname
     dbhost   = config.dbhost
@@ -69,7 +101,27 @@ def getEntry(accession):
         db.close()
 
 def getAllEntries(**kwargs):
+    '''
+    This function take accession, gene_id, location and or product
+    from the blapi, connects to the MySQL Database containing chromosome 6 genebank
+    entries and returns accession, gene_id, location and product of any matching entries.
+        
+    Parameters are selected by the user in the front end. They are passed from the front end to the blapi which call this function. Depending on user
+    data any one or more of the following. If no parameters entered 
+    Parameters
+    ----------
+    accession: Genebank accession number selected by the user in the front end
+    gene_id: Genebank gene_id selected by the user in the front end
+    location: Chromosome 6 location of genebank entry selected by the user in the front end
+    product: Gene product selected by the user in the front end
 
+    Return
+    ------
+    List of dictionaries:
+    [{'gene_id' : 'XXX', 'accession': 'XXX','product' :'XXX','location' :' XXX'}]
+    Returns: 'Exception occured: e' if error
+    '''
+    
     gene_records = []
 
     accession = '%' if kwargs['accession'] == '' else kwargs['accession']
