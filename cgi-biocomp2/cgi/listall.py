@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
-This CGI script  displays summary of the genes in a table, with Genbank Accession, Gene Identifier,
+This CGI script  displays summary of all the genes in a table, with Genbank Accession, Gene Identifier,
 Protein product and chromosomal location being the column headers. This CGI script also allows users 
 to select any Genbank Accession cell which will take user to summary page of that gene; summary page 
 will display Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal Location,
-Coding region-CDS,  DNA sequences-with coding regions highlighted and star indicating restriction enzyme
+Coding region-CDS, DNA sequences-with coding regions highlighted and star indicating restriction enzyme
 and codon frequency.
 ============
+Program: List all CGI script
 Author: Maham Ahmad
-Created on 17th April 2020
+Date Created: 18 April 2020
 """
 import cgi
 #print ("Content-Type: text/html\n")
@@ -74,7 +75,7 @@ html += "}"
 html += "</style>"
 
 
-#Gene summary table page: Genbank Accession, Gene Identifier, Protein product and chromosomal location
+#Gene summary table page: Genbank Accession, Gene Identifier, Protein product and chromosomal location with Genbank Accession linking to detail page of gene
 
 html += "<table id =\"t01\">"
 html += "<tr><th>Genbank Accession</th>"
@@ -84,7 +85,7 @@ html += "<th>Chromosomal Location</th>"
 html += "</tr>\n"
 for _ in entries:	
 	html += "<tr>\n"
-	html += "<td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/nextcgi.py?accession={}' method='get'>".format(_['accession'])+ _['accession']+ "</a></td>" #Change nextgci.py to search.py to run code
+	html += "<td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py?accession={}' method='get'>".format(_['accession'])+ _['accession']+ "</a></td>" 
 	html += "<td>"+_['gene_id'] + "</td>"	
 	html += "<td>"+_['product'] + "</td>"
 	html += "<td>"+_['location'] + "</td>"
