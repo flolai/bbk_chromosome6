@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 
-<!--This is a draft version of search HTML script, which displays the search page of the genome browser. Menu button
- on the side allows user to navigate through the browser.
-----------------------------------------------------------------------------------------------------------------------
-Users can search by Gene Identifier, Chromosmal location, Protein Product, Genbank Accession. As Genbank Accession is
-unique only one entry will be returned in table format, whereas the others can return one or more in table format. By
-clicking on desired Genbank Accesion cell, a summary page of that gene will be diplayed. Summary page will include:
+<!--This is a draft version of search HTML script, which displays the search page of the genome browser.
+Menu button on the side allows user to navigate through the browser.
+------------------------------------------------------------------------------------------------------------------
+Users can search by Gene Identifier, Chromosmal location, Protein Product and Genbank Accession. 
+As Genbank Accession is unique only one entry will be returned in table format, whereas the others can 
+return one or more in table format. By clicking on desired Genbank Accesion cell, a summary page of that
+gene will be diplayed. Summary page will include:
+
 Genbank Accession,
 Gene Identifier,
 Protein Product,
@@ -16,8 +18,10 @@ DNA sequences-with coding regions highlighted and star indicating restriction en
 Codon frequency.
   
 ============
+============
+Program: Draft Search HTML 
 Author: Maham Ahmad
-Created on 17th April 2020
+Date Created: 19 April 2020
 -->
 
 <html>
@@ -78,7 +82,7 @@ text-align:center;
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="draftindex.html">Home</a> 
-  <a href="draftsummary.html">Gene Summary</a>
+  <a href="http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/listallcgi.py">Gene Summary</a>
   <a href="draftsearch.html">Search</a>
 <p>HOME</p>
   
@@ -102,19 +106,19 @@ function closeNav() {
         
         <table>
           <tr>
-            <td>gene identifier</td>
+            <td>Gene Identifier</td>
             <td><input type='text' name='gene_id'/></td>
           </tr>
           <tr>
-            <td>protein product</td>
+            <td>Protein Product</td>
             <td><input type='text' name='product'/></td>
           </tr>
           <tr>
-            <td>genbank accession</td>
+            <td>Genbank Accession</td>
             <td><input type='text' name='accession'/></td>
           </tr>
           <tr>
-            <td>chromosomal location</td>
+            <td>Chromosomal Location</td>
             <td><input type='text' name='location'/></td>
           </tr>
         </table>
@@ -122,6 +126,7 @@ function closeNav() {
         <p><input type='Submit' value='Search' /></p>
 
       </form>
+
    
 </body>
 </html> 
