@@ -62,7 +62,9 @@ for i in all_info:
 
         
 
-#sort out record with complement strand        
+#reversing complement strand, also reversing the order of the sequence to make 
+#all sequence direction from 5' to 3'
+        
 for i in record_comp:
     dsq_comp = re.compile(r'\nORIGIN(.*)', re.DOTALL)
     dsq_comp = dsq_comp.findall(i)
@@ -78,6 +80,7 @@ for i in record_comp:
         comp_seq = [comp_seq.replace('2', 'a') for comp_seq in comp_seq]
         comp_seq = [comp_seq.replace('3', 'g') for comp_seq in comp_seq]
         comp_seq = [comp_seq.replace('4', 'c') for comp_seq in comp_seq]
+        comp_seq = comp_seq[::-1]
         comp_seq = ''.join(comp_seq)
 
     dsq_comp = dsq_comp.pop()
@@ -85,7 +88,8 @@ for i in record_comp:
     
     new_records.append(new_record)
 
-
+#combining records of 'normal' DNA sequence and the processed complement strand
+    
 full_record = record_no_comp + new_records
 
 
@@ -99,7 +103,7 @@ for i in full_record:
         dna_seq = re.compile(r'[a-z]+', re.DOTALL)
         dna_seq = dna_seq.findall(k)
         dna_seq = ''.join(dna_seq)
-        dna_seq = dna_seq.upper()
+        dna_seq = dna_seq.upper() # making sequence in upper case for consistancy with blapi
         
         codon_in_gene = []
    

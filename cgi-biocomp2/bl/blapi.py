@@ -29,19 +29,28 @@ front end.
 #*************************************************************************
 # Precalculated total codon frequency to return
 
-total_codon_freq = {'AAA': '3.73','AAC': '1.66','AAG': '1.96','AAT': '2.17',
- 'ACA': '1.96','ACC': '1.58','ACG': '0.92','ACT': '1.78','AGA': '2.20',
- 'AGC': '0.77','AGG': '1.70','AGT': '1.79','ATA': '1.91','ATC': '1.28',
- 'ATG': '1.43','ATT': '2.19','CAA': '1.61','CAC': '1.51','CAG': '1.45',
- 'CAT': '1.42','CCA': '1.49','CCC': '1.39','CCG': '0.86','CCT': '1.69',
- 'CGA': '0.91','CGC': '0.28','CGG': '0.86','CGT': '0.92','CTA': '1.29',
- 'CTC': '1.74','CTG': '1.45','CTT': '1.96','GAA': '1.98','GAC': '1.61',
- 'GAG': '1.75','GAT': '1.29','GCA': '0.79','GCC': '0.72','GCG': '0.29',
- 'GCT': '0.77','GGA': '1.75','GGC': '0.72','GGG': '1.40','GGT': '1.58',
- 'GTA': '1.47','GTC': '1.60','GTG': '1.54','GTT': '1.68','TAA': '2.20',
- 'TAC': '1.47','TAG': '1.30','TAT': '1.93','TCA': '1.76','TCC': '1.74',
- 'TCG': '0.91','TCT': '2.20','TGA': '1.78','TGC': '0.79','TGG': '1.49',
- 'TGT': '1.99','TTA': '2.22','TTC': '1.99','TTG': '1.64','TTT': '3.80'}
+total_codon_freq = {'AAA': '3.66','AAC': '1.67','AAG': '1.95',
+                    'AAT': '2.21','ACA': '1.94','ACC': '1.53',
+                    'ACG': '0.92','ACT': '1.77','AGA': '2.17',
+                    'AGC': '0.83','AGG': '1.68','AGT': '1.78',
+                    'ATA': '1.94','ATC': '1.31','ATG': '1.45',
+                    'ATT': '2.23','CAA': '1.63','CAC': '1.49',
+                    'CAG': '1.46','CAT': '1.45','CCA': '1.49',
+                    'CCC': '1.38','CCG': '0.84','CCT': '1.67',
+                    'CGA': '0.90','CGC': '0.32','CGG': '0.84',
+                    'CGT': '0.92','CTA': '1.31','CTC': '1.71',
+                    'CTG': '1.46','CTT': '1.96','GAA': '1.98',
+                    'GAC': '1.55','GAG': '1.73','GAT': '1.32',
+                    'GCA': '0.83','GCC': '0.77','GCG': '0.33',
+                    'GCT': '0.83','GGA': '1.72','GGC': '0.76',
+                    'GGG': '1.39','GGT': '1.54','GTA': '1.46',
+                    'GTC': '1.54','GTG': '1.51','GTT': '1.69',
+                    'TAA': '2.22','TAC': '1.46','TAG': '1.32',
+                    'TAT': '1.95','TCA': '1.77','TCC': '1.71',
+                    'TCG': '0.90','TCT': '2.17','TGA': '1.79',
+                    'TGC': '0.84','TGG': '1.50','TGT': '1.97',
+                    'TTA': '2.23','TTC': '1.99','TTG': '1.66',
+                    'TTT': '3.73'}
 
 #************************************************************************
 #import libraries
@@ -84,14 +93,16 @@ def getAllEntries(accession = '', gene_id = '', product = '',\
 def getEntry(accession = '', rez = ''): 
     rez = '' if rez == None else rez
     '''
-    Taking accession number and a choice of restriction enzyme information from 
+    This function will first taking accession number from 
     the front end. After processing, this function will return Genbank 
     accession numbers, Gene identifiers, protein product names and chromosomal 
     locations within chromosome 6.
-    Additionally, teh coding region will be marked with tags for front end to 
-    process for highlighting. The codon usage frequency of that particular 
-    gene and together with the total codon usage frequenceof chromsome 6 
-    will also be returned.
+    Additionally, the coding region will be marked with tags for highlighting. 
+    The codon usage frequency of that gene together with the total codon usage 
+    frequenceof chromsome 6 will also be returned.
+    Should the user of the browser selected the choice of restriction enzymes
+    available, the DNA sequence will then be further processed and return
+    the same DNA sequence with restriction enzyme marked with star.
     
     Input:
     accession: Genbank accession number
@@ -106,8 +117,8 @@ def getEntry(accession = '', rez = ''):
     
     Return:
     {'gene_id' : 'XXX', 'accession': 'XXX','product' : 'XXX','location' : 'XXX', 
-    'protein_seq': 'xxx', 'dna_seq': '<tag>xx><<RE>>x</tag>', 'cds':'xxx',
-    'freq':{AAA:0..'GGG':0}, 'total_freq':{AAA:0..'GGG':0}}
+    'protein_seq': 'xxx', 'dna_seq': '<mark>xx><span class = "re">&starf;</span>x</mark>', 
+    'cds':'xxx','codon_freq':{'AAA':'0'..'GGG':'0'}, 'total_codon_freq':{'AAA': '0'..'GGG':'0'}}
         
     '''
     
@@ -117,11 +128,8 @@ def getEntry(accession = '', rez = ''):
 #formating cds coming from database - removing non numerical strings
     
     cds = [gene_record['cds']]
-#    cds = [cds.replace('<', '') for cds in cds]
-#    cds = [cds.replace('>', '') for cds in cds]
     cds = [cds.replace('complement(', '') for cds in cds]
-    cds = [cds.replace('join(', '') for cds in cds]
-#    cds = [cds.replace(')', '') for cds in cds]         
+    cds = [cds.replace('join(', '') for cds in cds]         
     cds = cds.pop(0)   
     coding_dna = re.compile(r'\d+')  
     coding_dna = coding_dna.findall(cds)
