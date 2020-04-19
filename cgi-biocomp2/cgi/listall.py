@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
 """
-This CGI script  displays summary of all the genes in a table, with Genbank Accession, Gene Identifier,
-Protein product and chromosomal location being the column headers. This CGI script also allows users 
-to select any Genbank Accession cell which will take user to summary page of that gene; summary page 
+This CGI script  displays a summary table when Genbank Accession, Gene Identifier, Protein product
+or chromosomal location is searched on search html page. This CGI script also displays summary table of all 
+the genes in chromosome 6, when on the gene summary html page, with Genbank Accession, Gene Identifier,
+Protein product and chromosomal location being the column headers. 
+
+As Genbank Accession is unique, one entry in a table will be returned whereas for Gene Identifier,Protein
+product or chromosomal location one or more entries in a table can be returned. This CGI script also allows
+users to select any Genbank Accession cell which will take user to detail page of that gene; detail page
 will display Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal Location,
-Coding region-CDS, DNA sequences-with coding regions highlighted and star indicating restriction enzyme
-and codon frequency.
+Coding region-CDS,DNA sequences-with coding regions highlighted and star indicating restriction enzyme and 
+codon frequency.
 ============
 Program: List all CGI script
 Author: Maham Ahmad
-Date Created: 18 April 2020
+Date Created: 19 April 2020
 """
 import cgi
 #print ("Content-Type: text/html\n")
@@ -48,7 +53,7 @@ html += "<head>\n"
 html += "<title>Gene Summary Table</title>\n"
 html += "</head>"
 html += "<body>\n"
-html += "<h1>Gene Summary Table</h1>\n"
+html += "<h1>Gene Summary Table:</h1>\n"
 html += "<style>"
 html += "table{"
 html += "width:100%;"
