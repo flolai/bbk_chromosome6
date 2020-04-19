@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 This CGI script  displays the search results - a detailed page of the gene searched using Genbank Accession,
-Gene Identifier, Protein Product or Chromosomal Location #and restriction enzyme.#
+Gene Identifier, Protein Product or Chromosomal Location and restriction enzyme.
 ------------------------------------------------------------------------------------------------------------------
 Detail page includes:
 ------------------------------------------------------------------------------------------------------------------
@@ -11,7 +11,7 @@ DNA sequences-with coding regions highlighted and star indicating restriction en
 ============
 Program: Search CGI script
 Author: Maham Ahmad
-Date Created: 18 April 2020
+Date Created: 19 April 2020
 """
 
 # Add the bl sub-directory to the module path
@@ -33,26 +33,29 @@ cgitb.enable()  # Send errors to browser
 
 # Grab the content of the form
 form = cgi.FieldStorage()
+
+
+#*********************
+# DETAIL PAGE 
+#*********************
+
+
+accession = form.getvalue("accession")
+enzyme = form.getvalue("rez")
+entry = blapi.getEntry(accession, enzyme)
+
+
 html    = htmlutils.header()
-
-#SEARCH RESULTS
-
-
-
-accession = form.getvalue('accession')
-entry = blapi.getEntry(accession)
-
-
 html += "<html>\n"
 html += "<head>\n"
 html += "<h1> Results for: </h1>\n"
 html += "<li>"+accession+"</li>\n"
-#html+= "<p id=\"demo\"></p>"
+
 
 
 html += "<style>"
 html += "table{"
-html += "width:100%;"
+html += "width:150px;"
 html += "}"
 html += "table, {"
 html += "border: 1px solid black;"
@@ -100,74 +103,45 @@ html += entry['protein_seq']
 html += "</textarea>\n"
 html += "</hr\n>"
 
-enzyme = form.getvalue('enzyme')
 
-#DNA sequence with coding region highlighted
-#DROP DOWN
+#DNA sequence
+
 html += "<hr\n>"
 html += "<h2>DNA Sequence with coding region highlighted with star indicating restriction enzyme: </h2>\n"
-html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/rez.py' method='get'>"
 
-html += "<label for='Restriction Enzyme'>Select Genbank Accessiona and Restrction Enzyme:</label>"
-html += "<select id='accession' name= 'accession'>"
-html += "<option disabled selected value> -- select an option -- </option>"
-html += "<option value={}>".format(accession)+ accession+ "</option>"
-html += "</select> "
-html += "<select id='rez' name= 'rez'>"
-html += "<option disabled selected value> -- select an option -- </option>"
-html += "<option value='EcoRI'>EcoRI</option>"
-html += "<option value='BamHI'>BamHI</option>"
-html += "<option value='BsuMI'>BsuMI</option>"
-html += "<option value='KpnI'>KpnI</option>"
-html += "<option value='EcoRV'>EcoRV</option>"
-html += "<option value='SmaI'>SmaI</option>"
-html += "<option value='MscI'>MscI</option>"
-html += "</select> "
+html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>"
+html += "<input type='hidden' id='accession' name='accession' value='" + accession + "'>"
 
-html += "<input type='submit' value='Submit'>"
-html += "</form>"
-'''
-#html+= "<button type='button' onclick='myFunction()'>Try it</button>"
-html+= "<p id='rez'></p>"
-rez = form.getvalue('rez')
-html+= "<script>\
-function myFunction() {\
-  var x = document.getElementById('rez').value;\
-	document.getElementById('rez').innerHTML = x;\
-}\
-</script>"
-entry = blapi.getEntry(accession,rez)
-'''
+#Restriction Enzyme table
+html += "<table id ='t01'>"
+html += "<tr><th>Restriction enzyme</th>"
+html += "</tr>\n"
+html += "<tr>"
+html += "<td>" + entry['rez'] + "</td>"
+html += "</tr>"
+html += "</table>"
+
+#drop down for restriction enzyme
+html += """
+	<select name = "rez">
+        <option value = "Restriction enzyme list">Choose Restriction enzyme</option>
+	<option value = "EcoRI">EcoRI</option>
+	<option value = "BamHI">BamHI</option>
+	<option value = "BsuMI">BsuMI</option>
+	<option value = "KpnI">KpnI</option>
+	<option value = "EcoRV">EcoRV</option>
+	<option value = "SmaI">SmaI</option>
+	<option value = "MscI">MscI</option>
+	</select>
+	<input type = "submit" value = "Submit"/>
+	</form>
+"""
+#DNA sequence with coding region highlighted
 html += "<div Class {height:auto;} style='width:1000px;font-size: 11px; word-wrap:break-word;'>"
 html += entry['dna_seq']
 html += "</div>"
 html += "</hr\n>"
 
-#Codon usage in this gene
-html += "<style>"
-html += "table{"
-html += "width:50%;"
-html += "}"
-html += "table, {"
-html += "border: 1px solid black;"
-html += "border-collapse: collapse;"
-html += "}"
-html += "th, td {"
-html += "border: 1px white;"
-html += "padding: 15px;"
-html += "text-align: left;"
-html += "}"
-html += "table#t01 tr:nth-child(even){"
-html += "background-color: #eee;"
-html += "}"
-html += "table#t01 tr:nth-child(odd){"
-html += "background-color: #fff;"
-html += "}"
-html += "table#t01 th {"
-html += "background-color: black;"
-html += "color: white;"
-html += "}"
-html += "</style>"
 
 #Total codon usasge in this Gene
 html += "<hr\n>"
@@ -199,11 +173,10 @@ for key, value in entry['total_freq'].items():
     html += "<td>"+ value+"</td>"
     html += "</tr>"
 html += "</table>\n"
+
 html += "</body>\n"
+html += "</html>\n>"
 html += htmlutils.footer()
-
-
-
 
 
 print(html)  
