@@ -81,7 +81,8 @@ PRIMARY KEY (accession),
 INDEX (accession)   
 );  
 	
-Once data has been loaded into table add index with below statements:  
+Once data has been loaded into table add index with below statement:
+
 CREATE INDEX accession_x ON chrom6 (accession);  
 
 
