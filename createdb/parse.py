@@ -25,8 +25,6 @@ Return
 List of lists:
 [[‘accession1’, ’gene_id1’, ’location1’, ’product1’, ’CDS1’, ’Protein Sequence1’, ’dna_seq1’]
 [  ‘accessionX’, ’gene_idX’, ’location X’, ’product X’, ’CDS X’, ’Protein SequenceX’, ’dna_seqX’]]
-	
-
 
 """
 
