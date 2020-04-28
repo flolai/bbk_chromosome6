@@ -4,7 +4,7 @@
 Program: Parser
 Date Created: 2nd April 2020
 
-Author: Florence Lai / Oliver Cant 
+Author: Oliver Cant / Florence Lai
 Programe: Genbank parser 
 Function: Read Genbank download and greps relevant information to and create upload file for MYSQL database
 
