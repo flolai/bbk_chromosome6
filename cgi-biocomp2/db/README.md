@@ -2,7 +2,6 @@ Biocomputing II / cgi-biocomp2/db
 =================================
 
 Description
-
 This directory contains the python code to access the MySQL database. It connects to the MySQL database using PyMySQL and executes a MySQL query based on data from the BLAPI. It returns information from matching entries in the database to the blapi as either a dictionary, or list of dictionaries. 
 
 Connecting to Chromosome 6 Database
