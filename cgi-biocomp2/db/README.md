@@ -2,20 +2,16 @@ Biocomputing II / cgi-biocomp2/db
 =================================
 
 Description
-
 This directory contains the python code to access the MySQL database. It connects to the MySQL database using PyMySQL and executes a MySQL query based on data from the BLAPI. It returns information from matching entries in the database to the blapi as either a dictionary, or list of dictionaries. 
 
-Connecting to Chromosome 6 Database
-
+Connecting to Chromosome 6 Database:
 The Chromosome 6 genbank entries are held in a MySQL database. (see create DB for information on database). The dbapi connects to the database using PyMySQL library. Database connection parameters are held in the config file (cgi-biocomp2/config.py).
 
 
 Functions
-
-The dbapi contains two functions
+The dbapi contains two functions:
 
 getEntry(accession)
-
 This function takes accession number from the blapi and returns accession number, gene identifier, protein product, chromosome 6 location, protein sequence and dna sequence from the genbank database as a dictionary
 
 Input:
@@ -24,7 +20,7 @@ Accession: Genbank accession number e.g (‘AB000905’).
 Return:
 
 {'gene_id': 'XXX', 'accession': 'XXX', 'product': 'XXX', 'location': 'XXX', 
-     'cds': 'XXX', 'protein_seq': 'XXX', 'dna_seq': 'XXX'}
+'cds': 'XXX', 'protein_seq': 'XXX', 'dna_seq': 'XXX'}
 
 
 
