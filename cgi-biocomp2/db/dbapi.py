@@ -4,7 +4,7 @@ File: dbapi.py
 
 Version: V2.0
 Date Crated: 11-Apr 2020
-Function: Python wrapper for MySQL Genebank chromosome 6 database. Searches databaseand returns
+Function: Python wrapper for MySQL Genebank chromosome 6 database. Searches database and returns
 matching entry details to the blapi.py 
 
 Description:
@@ -42,8 +42,7 @@ import config # import configuration information
 def getEntry(accession):
     '''
     Takes accession number from blapi.py, connects to MySQL database and returns accession number,
-    Gene ID, protein, location on chromosome 6, DNA sequence and protein sequence of matching gene
-    bank entry
+    Gene ID, protein, location on chromosome 6, DNA sequence and protein sequence of matching genbank entry
     to the blapi.
 
     Parameters
@@ -106,10 +105,13 @@ def getAllEntries(**kwargs):
     from the blapi, connects to the MySQL Database containing chromosome 6 genebank
     entries and returns accession, gene_id, location and product of any matching entries.
         
-    Parameters are selected by the user in the front end. They are passed from the front end to the blapi which call this function. Depending on user
-    data any one or more of the following. If no parameters entered 
+    Parameters are selected by the user in the front end. They are passed from the front end to
+    the blapi which call this function. 
+    
     Parameters
     ----------
+    Any one or more of the following arguments may be searched on, if none of the below are entered
+    all entries in the database are returned:
     accession: Genebank accession number selected by the user in the front end
     gene_id: Genebank gene_id selected by the user in the front end
     location: Chromosome 6 location of genebank entry selected by the user in the front end
