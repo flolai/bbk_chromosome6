@@ -1,4 +1,4 @@
-## 2.	Genbank Database
+This readme contains information on how to populate the MySQL database with data extracted from the provided genbank file by the parser
 
 #### Logical Schema
  
