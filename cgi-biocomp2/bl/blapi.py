@@ -66,8 +66,7 @@ import config  # Import configuration information
 
 #*************************************************************************
 
-def getAllEntries(accession = '', gene_id = '', product = '',\
-             location = ''):
+def getAllEntries(accession , gene_id, product,location):
     '''
     function to return all entries from database which contains chromosome 6
     data from Genbank to the front end
@@ -90,7 +89,7 @@ def getAllEntries(accession = '', gene_id = '', product = '',\
                                product = product , location = location))
     
 #************************************************************************     
-def getEntry(accession = '', rez = ''): 
+def getEntry(accession, rez = ''): 
     rez = '' if rez == None else rez
     '''
     This function will first taking accession number from 
