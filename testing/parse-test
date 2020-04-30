@@ -1,0 +1,220 @@
+#!/usr/bin/env python3
+
+"""
+Unit testing existing code
+
+Original author: Florence
+Edited: Oliver
+Tested: Nini
+
+2020
+
+"""
+#Test for database parsing code
+
+import unittest
+import re
+
+all_info = []
+record = []
+chrom_6_data = []
+
+
+with open('/Users/nininguyen/Desktop/MScBioinformatics/chrom_CDS_6.txt', 'r') as f:
+    info = f.read().split('//\n')[:-1]
+
+
+class ParsingTestCase(unittest.TestCase):
+
+    def test_removing_seqs(self):
+        """ To test removing all DNA sequences from chrom_CDS_6.txt file
+
+            ------------------------------
+            Verification:
+            OK
+        """
+        
+        for i in info:     
+            seq_check = re.compile(r'\nORIGIN(.*)', re.DOTALL)
+            seq_check = seq_check.findall(i)
+        for k in seq_check:
+            if 'y' not in k and 'r' not in k and 'n' not in k and 'w' not in k and 's' not in k \
+            and 'm' not in k and 'k' not in k and 'k' not in k and 'r'  not in k and 'b' not in k \
+            and 'd' not in k and 'h' not in k and 'v' not in k and 'z' not in k:
+                all_info.append(i)
+
+        if i in info:
+            seq = '\nORIGIN\n1 ctgcagtaga taatgaggta accgaaggca attgtgcttc ttttgataag aagctttctt'
+            self.assertRegex(seq, re.compile(r'\nORIGIN(.*)', re.DOTALL), msg = None)
+
+
+
+
+    def test_filter_entries(self):
+        """ To test filtering entries, to get the gene ID, location, translation, protein product
+
+            ------------------------------
+            Verification:
+            Error - could not assert false value for unfiltered entry
+        """
+        
+        for i in all_info:
+            if 'gene=' in i and 'map=' in i and '/translation=' in i\
+            and  '/product=' in i and '/allele=' not in i:
+                record.append(i)
+
+        for i in all_info:
+            filtered_entry = '/gene= \n /map= \n /translation= \n /product= '
+            self.assertTrue(filtered_entry, msg = None)
+
+           #unfiltered_entry = '\allele='
+           #self.assertFalse(unfiltered_entry, msg = None) 
+          #could not assert false value for unflitered entry
+
+
+
+
+    def test_get_DNAseqs(self):
+        """ To test compiling DNA sequences from chrom_CDS_6.txt file
+            --------------------------------
+            Verification:
+            Error: variable dsq is referenced before assignment
+        """
+
+        for i in record:  
+            dsq = re.compile(r'\nORIGIN(.*)', re.DOTALL)
+            dsq = dsq.findall(i)    
+        for k in dsq:
+            dna_seq = re.compile(r'[a-z]+', re.DOTALL)
+            dna_seq = dna_seq.findall(k)
+            dna_seq = ''.join(dna_seq)
+            dna_seq = dna_seq.upper()
+        if i in record:
+            dseq = 'ATGATCCTAAACAAAGCTCTGATGCTGGGGGCCCTTGCCCTGACCACCGTGATGAGCCCCTGTGGAGGTGAAGACATTGTGG'
+            self.assertSequenceEqual(dsq, dseq, msg = None)
+            #test error: variable dsq is referenced before assignment?
+
+
+
+    def test_get_accession(self):
+        """ To compile all accession numbers from the chrom_CDS_6.txt file
+            -------------------------------
+            Verification:
+            OK
+        """
+        
+        for i in record:
+            a = re.compile(r'ACCESSION\s+(.*)', re.DOTALL)
+            a = a.findall(i)   #to print all accession number including one with multiple accessions  
+            if accession in a:
+                accession = accession.split( )[0:1]
+                accession = accession.pop(0)
+            if accession in a:
+                self.assertTrue(accession, msg = None)            
+
+
+
+
+    def test_get_location(self):
+        """ To compile all map locations from the chrom_CDS_6.txt file
+            --------------------------------
+            Verification:
+            OK
+        """
+        for i in record:
+            loc = re.compile(r'map="(.*)')
+            loc = loc.findall(i)# print all location from map=
+            loc = [loc.replace('"', '') for loc in loc]
+            location = loc.pop(0)
+        for i in record:
+            location2 = 'map= 6p21.3'
+            self.assertRegex(location2, re.compile(r'map="(.*)'), msg = None)
+            
+
+
+
+    def test_get_geneID(self):
+        """ To test compiling all CDS gene ID's from the chrom_CDS_6.txt file
+            ----------------------------------
+            Verification:
+            OK
+        """
+        
+        for i in record:
+            gn = re.compile(r'gene="(.*)') # greping gene CDS id
+            gn = gn.findall(i)
+            gn = [gn.replace('"', '') for gn in gn]
+            gene = gn.pop(0)
+        for i in record:
+            gene2 = 'gene= MICB01021 '
+            self.assertRegex(gene2, re.compile(r'gene="(.*)'), msg = None)
+
+
+
+
+    def test_get_product(self):
+        """ To test compiling all protein products from the chrom_CDS_6.txt file
+            ----------------------------------
+            Verification:
+            OK
+        """
+        
+        for i in record:
+            prt = re.compile(r'product="(.*)')
+            prt = prt.findall(i)    
+            prt = [prt.replace('"', '') for prt in prt]
+            prt = [prt.replace(',','') for prt in prt] # remove commas from protein product for import to sql
+            product = prt.pop(0)
+        for i in record:
+            product2 = 'product= H4 histone '
+            self.assertRegex(product2, re.compile(r'product="(.*)'), msg = None)
+
+            
+
+
+    def test_get_Protseqs(self):
+        """ To test compiling all protein sequences,and removal of whitespace and newline characters
+            ---------------------------------
+            Verification:
+            OK
+        """
+        
+        for i in record:
+            prot_seq = re.compile(r'translation="([A-Z\s]+)"', re.DOTALL)
+            prot_seq = prot_seq.findall(i)  
+            prot_seq = [prot_seq.replace('\n','') for prot_seq in prot_seq]
+            prot_seq = [prot_seq.replace(" ",'') for prot_seq in prot_seq]
+            protein_seq = prot_seq.pop(0)
+        for i in record:
+            protein_seq2 = 'translation=MSGRGKGGKGLGKGGAKRHRKVLRDNIQGITKPAIRRLARRGGVKRISGLIYEETRGVLKVFLENVIRDAVTYTEHAKRKTVTAMDVVYALKRQGRTLYGFGG'
+            self.assertRegex(protein_seq2, re.compile(r'translation="([A-Z\s]+)"', re.DOTALL), msg = None)
+
+
+
+    def test_get_cds(self):
+        """ To test compiling all CDS from the chrom_CDS-6.txt file
+            --------------------------------
+            Verification:
+            OK
+        """
+
+        for i in record:
+            cds = re.compile(r'CDS\s{13}([^\/]*)')
+            cds = cds.findall(i)
+            cds = [cds.replace('<', '') for cds in cds]
+            cds = [cds.replace('>', '') for cds in cds]
+            cds = [cds.replace(')', '') for cds in cds]
+            cds = [cds.replace('\n', '') for cds in cds]
+            cds = [cds.replace(' ', '') for cds in cds]
+            cds = [cds.replace(',', ';') for cds in cds]
+            cds = cds.pop(0)
+            all_cds.append(cds)
+        for i in record:
+            cds2 = 'join(61..315587..8741039..13171417..1548'
+            self.assertRegex(cds2, re.compile(r'CDS\s{13}([^\/]*)'), msg = None)
+            
+            
+            
+    
+if __name__ == '__main__':
+    unittest.main()
