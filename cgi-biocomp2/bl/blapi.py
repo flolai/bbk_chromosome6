@@ -66,12 +66,12 @@ import config  # Import configuration information
 
 #*************************************************************************
 
-def getAllEntries(accession , gene_id, product,location):
+def getAllEntries(accession = None, gene_id = None, product = None, location = None):
     '''
     function to return all entries from database which contains chromosome 6
     data from Genbank to the front end
     
-    Input: depending on user data input could be any of the following.
+    Input: All of the following parameters.
     accession: Genbank accession number
     gene_id: Gene identifier
     product: protein product name
