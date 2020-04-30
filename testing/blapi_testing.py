@@ -66,7 +66,7 @@ import dbapi   # Import the database api
 
 #*************************************************************************
 
-def getAllEntries(accession , gene_id, product,location):
+def getAllEntries(accession = None, gene_id = None, product = None, location = None):
     '''
     function to return all entries from database which contains chromosome 6
     data from Genbank to the front end
@@ -82,6 +82,18 @@ def getAllEntries(accession , gene_id, product,location):
     Return: [{'gene_id' : 'XXX', 'accession': 'XXX','product' :'XXX','location' :' XXX'}]
     -- A list of dictionaries containing Genbank accession numbers, Gene identifiers,
        protein product names adn chromosomal locations within chromosome 6
+       
+       """
+       >>> getAllEntries(None,'NOTCH4', None, None)
+       [{'gene_id': 'NOTCH4', 'accession': 'AB023961', 'product': 'notch4', 'location': '6p21.3'}, {'gene_id': 'NOTCH4', 'accession': 'D86566', 'product': 'notch related protein', 'location': '6p21.3'}, {'gene_id': 'NOTCH4', 'accession': 'U89335', 'product': 'notch4', 'location': '6p21'}, {'gene_id': 'NOTCH4', 'accession': 'U89336', 'product': 'G18', 'location': '6p21'}]
+
+       >>> getAllEntries('Z95326',None, None, None)
+       [{'gene_id': 'SLC35F1', 'accession': 'Z95326', 'product': 'solute carrier family 35 member F1', 'location': 'q22.1-22.33'}]
+       
+       >>> getAllEntries(None,None, None,'6q22-q23')
+       [{'gene_id': 'PDNP1', 'accession': 'AB032016', 'product': 'phosphodiesterase I/nucleotide pyrophosphatase', 'location': '6q22-q23'}]
+       
+       """
     
     '''
     
@@ -227,3 +239,6 @@ def getEntry(accession, rez = ''):
                 
     return(r_gene_record)    
 
+if __name__ == "__main__":
+   import doctest
+   doctest.testmod()
