@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 def bar(self, MSG, file=sys.stdout):
-'''
+    '''
     """
     >>> Content-Type: text/html
 
@@ -2035,8 +2035,8 @@ Program: List all CGI script
 Author: Maham Ahmad
 Date Created: 19 April 2020
 
-'''
-
+    '''
+    print(MSG, file=file)
 
 import cgi
 #print ("Content-Type: text/html\n")
@@ -2127,7 +2127,7 @@ html += htmlutils.footer()
 #print(html)   
 
 
-    print(MSG, file=file)
+    
     
 if __name__ == "__main__":
    import doctest
