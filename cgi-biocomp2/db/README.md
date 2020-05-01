@@ -32,11 +32,11 @@ This function takes any combination of accession, gene identified, chromosome lo
 The parameters are keyword arguments so the keyword should be entered before the search value e.g “accession = ‘AB000905’”.
 Keywords must be entered for all search fields whether the user has supplied data or not. Where the user has not supplied data into the search field the search value should be ‘none’: e.g “accession = none”. 
 
-*Example 1, search based on one parameter:*
+*Example 1, search based on one parameter:*  
 getAllEntries(accession= ‘AF065210’, product= ‘None’, location= ‘None’, gene_id= ‘None’)
 
 
-*Example 2, search based on two parameters* 
+*Example 2, search based on two parameters*   
 getAllEntries(accession= ‘AF065210’, product= ‘None’, location= ‘None’, gene_id= ‘Rage’)
 Searches based on all four parameters are possible. Where all search fields are ‘none’ all entries in the database are returned. 
 
