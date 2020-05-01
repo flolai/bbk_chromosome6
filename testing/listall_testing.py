@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
+def bar(self, MSG, file=sys.stdout):
 '''
-
     """
-    >>>Content-Type: text/html
+    >>> Content-Type: text/html
 
 <!DOCTYPE html><html>
   <head>
@@ -2053,8 +2053,8 @@ import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 
 # Useful debugging output
-import cgitb
-cgitb.enable()
+#import cgitb
+#cgitb.enable()
 
 # Grab the content of the form
 form = cgi.FieldStorage()
@@ -2126,7 +2126,7 @@ html += htmlutils.footer()
 
 #print(html)   
 
-def bar(self, MSG, file=sys.stdout):
+
     print(MSG, file=file)
     
 if __name__ == "__main__":
