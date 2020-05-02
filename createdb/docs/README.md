@@ -1,4 +1,4 @@
-This readme contains information on how to populate the MySQL database with data extracted from the provided genbank file by the parser
+This readme contains information on how to populate the MySQL database
 
 #### Logical Schema
  
@@ -42,7 +42,9 @@ PRIMARY KEY (accession)
 	
 Once data has been loaded into table add index with below statement:
 
-CREATE INDEX accession_x ON chrom6 (accession);  
+CREATE INDEX accession_IDX ON chrom6 (accession);  
+
+Index added on accession as likely to be the most frequently searched on field as search tables provide the option to click through on accession to get full entry details. 
 
 
 #### Load Data Statement
