@@ -45,10 +45,11 @@ V1.0   	10.04.20   Original   By: Maham Ahmad
 
 import unittest
 import sys
+import cgi
 class htmlTestCase(unittest.TestCase):
     def test_html(self, MSG, file = sys.stdout):
         
-        import cgi
+        
         print ("Content-Type: text/html\n")
 
 # Add the bl sub-directory to the module path
