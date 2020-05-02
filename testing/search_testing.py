@@ -45,12 +45,12 @@ class htmlTestCase(unittest.TestCase):
         sys.path.insert(0, "/d/user6/az001/db/") #Config file saved in db folder
 
 
-import blapi      # Import the Business Logic API
-import htmlutils  # Import HTML utilities
-import config     # Import configuration information (e.g. URLs)
-import dbapi      # Import the Datbase API
-import pandas as pd
-import cgi 
+    import blapi      # Import the Business Logic API
+    import htmlutils  # Import HTML utilities
+    import config     # Import configuration information (e.g. URLs)
+    import dbapi      # Import the Datbase API
+    import pandas as pd
+    import cgi 
 
 # Useful debugging output
     import cgitb
@@ -155,16 +155,16 @@ import cgi
 #******************************************************
     dictlist = []
     for key, value in entry['freq'].items(): 
-         = key
-         tlist.append(cod)
+         cod = key
+         dictlist.append(cod)
 	 
     df = pd.DataFrame()
     df['Codon'] = dictlist
     df['Freq'] = df['Codon'].map(entry['freq'])
     dictlist2 = []
     for key, value in entry['total_freq'].items(): 
-         = key
-         tlist2.append(cod)
+         cod = key
+         dictlist2.append(cod)
 
 	 
     df2 = pd.DataFrame()
