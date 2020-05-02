@@ -46,6 +46,12 @@ V1.0   	10.04.20   Original   By: Maham Ahmad
 import unittest
 import sys
 import cgi
+import blapi      # Import the Business Logic API
+import htmlutils  # Import HTML utilities
+import config     # Import configuration information (e.g. URLs)
+# Useful debugging output
+import cgitb
+cgitb.enable()
 class htmlTestCase(unittest.TestCase):
     def test_html(self, file = sys.stdout):
         
@@ -59,14 +65,9 @@ class htmlTestCase(unittest.TestCase):
     sys.path.insert(0, "/d/user6/az001/bl/")
     sys.path.insert(0, "/d/user6/az001/db/") 
 
-    import blapi      # Import the Business Logic API
-    import htmlutils  # Import HTML utilities
-    import config     # Import configuration information (e.g. URLs)
+    
 
 
-# Useful debugging output
-    import cgitb
-    cgitb.enable()
 
 #*****************************************************************************************************************************************************************************************
 
