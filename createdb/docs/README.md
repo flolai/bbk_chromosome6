@@ -1,4 +1,4 @@
-This readme contains information on how to populate the MySQL database with data extracted from the provided genbank file by the parser
+This readme contains information on how to populate the MySQL database
 
 #### Logical Schema
  
@@ -30,26 +30,27 @@ This readme contains information on how to populate the MySQL database with data
 #### Table Definition
   
   **CREATE TABLE chrom6**  
-( 	gene_id	VARCHAR(20a) NOT NULL,  
+( 	gene_id	VARCHAR(20) NOT NULL,  
 accession	VARCHAR(20) NOT NULL,  
 product	TEXT NOT NULL,  
 location	VARCHAR(20) NOT NULL,  
 cds		MEDIUMTEXT NOT NULL,  
 protein_seq	MEDIUMTEXT NOT NULL,  
 dna_seq	MEDIUMTEXT NOT NULL,  
-PRIMARY KEY (accession),  
-INDEX (accession)   
+PRIMARY KEY (accession)  
 );  
 	
 Once data has been loaded into table add index with below statement:
 
-CREATE INDEX accession_x ON chrom6 (accession);  
+CREATE INDEX accession_IDX ON chrom6 (accession);  
+
+Index added on accession as likely to be the most frequently searched on field as search tables provide the option to click through on accession to get full entry details. 
 
 
 #### Load Data Statement
-Updated below system path (highlighted in blue) with location of data created by the parser  
+Updated below system path (in italics) with location of data created by the parser  
 
-LOAD DATA INFILE '/d/user6/co001/Desktop/BIOCOMP/mysql_data5.txt'  
+LOAD DATA INFILE *'/d/user6/co001/Desktop/BIOCOMP/mysql_data5.txt'*  
 INTO TABLE chrom6  
 FIELDS TERMINATED BY ',' ENCLOSED BY '\''  
 LINES TERMINATED BY ']' STARTING BY '['  
