@@ -3,8 +3,8 @@
 Program:    Search CGi Script
 File:       search.py
 
-Version:    V8.0
-Date:       01.05.2020
+Version:    V9.0
+Date:       02.05.2020
 Function:   Obtains accession and rez entries from the BL layer and formats them for 
 	    HTML display.
 
@@ -18,8 +18,7 @@ This program is released under the GNU Public Licence (GPL V3)
 Description:
 ============
 This CGI script  displays the search results - a detailed page of the gene searched using
-Genbank Accession,Gene Identifier, Protein Product or Chromosomal Location and restriction
-enzyme.
+Genbank Accession,Gene Identifier, Protein Product or Chromosomal Location.
 
 Detail page includes:
 =====================
@@ -28,6 +27,7 @@ Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromo
 Location, Coding region-CDS, DNA sequences-with coding regions highlighted and star
 indicating where the restriction enzyme cuts and codon frequency.
 
+=================
 Revision History:
 =================
 V1.0   	15.04.20   Original   By: Maham Ahmad
@@ -46,6 +46,7 @@ import blapi      # Import the Business Logic API
 import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 import dbapi      # Import the Datbase API
+import pandas as pd
 import cgi 
 
 # Useful debugging output
@@ -77,8 +78,7 @@ html    = htmlutils.header()
 html += htmlutils.navigation()
 
 
-
-# Summary table
+# detail table
 
 html += htmlutils.detailtable()
 html += "<td>"+entry['accession']+ "</td>\n"
@@ -92,7 +92,7 @@ html += "</table>\n"
 #Text area for Amino acid sequences
 
 html += "<h4 class= 'table-heading'>Amino Acid Sequence:</h4>\n"
-html += "<textarea readonly>\n"
+html += "<textarea class ='amino-acid' readonly>\n"
 html += entry['protein_seq']
 html += "</textarea>\n"
 
@@ -105,7 +105,7 @@ html += "</textarea>\n"
 
 
 html += "<h4 class= 'table-heading' >DNA Sequence: </h4>\n"
-html += "<p1> Coding region has been highlighted. <br>By choosing a Retriction Enzyme, a star will appear in the DNA sequence below. This star will indicate that the Restriction Enzyme cuts at particular site.</p1>\n"
+html += "<div class = 'dna-info'> Coding region has been highlighted. <br>By choosing a Retriction Enzyme, a star will appear in the DNA sequence below. This star will indicate that the Restriction Enzyme cuts at particular site.</div>\n"
 html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>\n"
 html += "<input type='hidden' id='accession' name='accession' value='" + accession + "'>\n"
 
@@ -145,40 +145,58 @@ html += entry['dna_seq']
 html += "</div>\n"
 
 
+#******************************************************
 
-#Total codon usasge in this Gene
+#Total codon usasge in this Gene vs in chromosome 6
 
-html += "<h4 class= 'table-heading'>Codon usage in this Gene </h4>\n"
+#******************************************************
+dictlist = []
+for key, value in entry['freq'].items(): 
+	cod = key
+	dictlist.append(cod)
+	 
+df = pd.DataFrame()
+df['Codon'] = dictlist
+df['Freq'] = df['Codon'].map(entry['freq'])
+dictlist2 = []
+for key, value in entry['total_freq'].items(): 
+	cod = key
+	dictlist2.append(cod)
+
+	 
+df2 = pd.DataFrame()
+df2['Codon'] = dictlist2
+df2['Total Freq'] = df2['Codon'].map(entry['total_freq'])
+
+
+df['Codon'] = df['Codon'].str.strip()
+df2['Codon'] = df2['Codon'].str.strip()
+
+df3 = df.merge(df2, left_on ='Codon', right_on='Codon')
+df3 = df3[['Codon', 'Freq', 'Total Freq']]
+
+# Frequency of codon usage in particular gene vs chromosome six
+
+html += "<h4 class= 'table-heading'>Codon usage frequencies in this gene vs in Chromosome Six </h4>\n"
 html += "<table class= 'codon'>\n"
 html += "<tr>\n"
 html += "<th>Codon</th>\n"
 html += "<th>Frequency</th>\n"
-#temp = []
-for key, value in entry['freq'].items():    
+html += "<th>Total Frequency</th>\n"
+for _ in range(0,len(df3)):
 
     html += "<tr>\n"
-    html += "<td>"+key+ "</td>\n"
-    html += "<td>"+ value+"</td>\n"
+    html += "<td>"+ df3['Codon'][_]+"</td>\n"
+    html += "<td>"+ df3['Freq'][_]+"</td>\n"
+    html += "<td>"+ df3['Total Freq'][_]+"</td>\n"
     html += "</tr>\n"
 html += "</table>\n"
 
 
-
-#Total codon usasge in this Chromosome
-
-html += "<h4 class= 'table-heading' >Total Codon usage in Chromosome 6</h4>\n"
-html += "<table class= 'codon'>\n"
-html += "<tr>\n"
-html += "<th>Codon</th>\n"
-html += "<th>Frequency</th>\n"
-#cod = []
-for key, value in entry['total_freq'].items():    
-
-    html += "<tr>\n"
-    html += "<td>"+key+ "</td>\n"
-    html += "<td>"+ value+"</td>\n"
-    html += "</tr>\n"
-html += "</table>\n"
 
 html += htmlutils.footer()
 print(html)
+
+
+
+#print(df3)
