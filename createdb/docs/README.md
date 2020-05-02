@@ -30,15 +30,14 @@ This readme contains information on how to populate the MySQL database with data
 #### Table Definition
   
   **CREATE TABLE chrom6**  
-( 	gene_id	VARCHAR(20a) NOT NULL,  
+( 	gene_id	VARCHAR(20) NOT NULL,  
 accession	VARCHAR(20) NOT NULL,  
 product	TEXT NOT NULL,  
 location	VARCHAR(20) NOT NULL,  
 cds		MEDIUMTEXT NOT NULL,  
 protein_seq	MEDIUMTEXT NOT NULL,  
 dna_seq	MEDIUMTEXT NOT NULL,  
-PRIMARY KEY (accession),  
-INDEX (accession)   
+PRIMARY KEY (accession)
 );  
 	
 Once data has been loaded into table add index with below statement:
