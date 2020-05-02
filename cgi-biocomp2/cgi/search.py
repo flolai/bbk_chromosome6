@@ -1,17 +1,38 @@
 #!/usr/bin/python3
 """
-This CGI script  displays the search results - a detailed page of the gene searched using Genbank Accession,
-Gene Identifier, Protein Product or Chromosomal Location and restriction enzyme.
-------------------------------------------------------------------------------------------------------------------
-Detail page includes:
-------------------------------------------------------------------------------------------------------------------
-Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal Location, Coding region-CDS,
-DNA sequences-with coding regions highlighted and star indicating restriction enzyme and codon frequency.
+Program:    Search CGi Script
+File:       search.py
 
+Version:    V8.0
+Date:       01.05.2020
+Function:   Obtains accession and rez entries from the BL layer and formats them for 
+	    HTML display.
+
+Copyright:  (c) Maham Ahmad, Birckbeck, 2020
+Author:     Maham Ahmad
+            
+------------------------------------------------------------------------------------------
+This program is released under the GNU Public Licence (GPL V3)
+------------------------------------------------------------------------------------------
 ============
-Program: Search CGI script
-Author: Maham Ahmad
-Date Created: 19 April 2020
+Description:
+============
+This CGI script  displays the search results - a detailed page of the gene searched using
+Genbank Accession,Gene Identifier, Protein Product or Chromosomal Location and restriction
+enzyme.
+
+Detail page includes:
+=====================
+
+Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal
+Location, Coding region-CDS, DNA sequences-with coding regions highlighted and star
+indicating where the restriction enzyme cuts and codon frequency.
+
+Revision History:
+=================
+V1.0   	15.04.20   Original   By: Maham Ahmad
+
+
 """
 
 # Add the bl sub-directory to the module path
@@ -25,7 +46,7 @@ import blapi      # Import the Business Logic API
 import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 import dbapi      # Import the Datbase API
-import cgi
+import cgi 
 
 # Useful debugging output
 import cgitb
@@ -35,9 +56,12 @@ cgitb.enable()  # Send errors to browser
 form = cgi.FieldStorage()
 
 
-#*********************
-# DETAIL PAGE 
-#*********************
+
+#***********************************************************************************************************************************************************************************************
+
+# MAIN PROGRAMME FOR DETAIL PAGE 
+
+#***********************************************************************************************************************************************************************************************
 
 
 accession = form.getvalue("accession")
@@ -45,138 +69,116 @@ enzyme = form.getvalue("rez")
 entry = blapi.getEntry(accession, enzyme)
 
 
+
+
+# Header and navigation
+
 html    = htmlutils.header()
-html += "<html>\n"
-html += "<head>\n"
-html += "<h1> Results for: </h1>\n"
-html += "<li>"+accession+"</li>\n"
+html += htmlutils.navigation()
 
 
 
-html += "<style>"
-html += "table{"
-html += "width:150px;"
-html += "}"
-html += "table, {"
-html += "border: 1px solid black;"
-html += "border-collapse: collapse;"
-html += "}"
-html += "th, td {"
-html += "border: 1px white;"
-html += "padding: 15px;"
-html += "text-align: left;"
-html += "}"
-html += "table#t01 tr:nth-child(even){"
-html += "background-color: #eee;"
-html += "}"
-html += "table#t01 tr:nth-child(odd){"
-html += "background-color: #fff;"
-html += "}"
-html += "table#t01 th {"
-html += "background-color: black;"
-html += "color: white;"
-html += "}"
-html += "</style>"
-html += "</head>"
-html += "<body>"
-html += "<table id ='t01'>"
-html += "<tr><th>Genbank Accession</th>"
-html += "<th>Gene Identifier</th>"
-html += "<th>Protein Product</th>"
-html += "<th>Chromosomal Location</th>"
-html += "<th>Coding Region - CDS</th>"
+# Summary table
+
+html += htmlutils.detailtable()
+html += "<td>"+entry['accession']+ "</td>\n"
+html += "<td>"+entry['gene_id'] + "</td>\n"	
+html += "<td>"+entry['product'] + "</td>\n"
+html += "<td>"+entry['location'] + "</td>\n"
+html += "<td>"+entry['cds'] + "</td>\n"
 html += "</tr>\n"
-html += "<tr>"
-html += "<td>"+entry['accession']+ "</td>"
-html += "<td>"+entry['gene_id'] + "</td>"	
-html += "<td>"+entry['product'] + "</td>"
-html += "<td>"+entry['location'] + "</td>"
-html += "<td>"+entry['cds'] + "</td>"
-html += "</tr>"
-html += "</table>"
+html += "</table>\n"
 
 #Text area for Amino acid sequences
-html += "<hr\n>"
-html += "<h2>Amino Acid Sequence:</h2>\n"
-html += "<textarea readonly style='width:500px; height:100px; word-wrap:break-word;'>"
+
+html += "<h4 class= 'table-heading'>Amino Acid Sequence:</h4>\n"
+html += "<textarea readonly>\n"
 html += entry['protein_seq']
 html += "</textarea>\n"
-html += "</hr\n>"
 
 
-#DNA sequence
+#**********************************************************
 
-html += "<hr\n>"
-html += "<h2>DNA Sequence with coding region highlighted with star indicating restriction enzyme: </h2>\n"
+# DNA sequence and resitriction enzyme 
 
-html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>"
-html += "<input type='hidden' id='accession' name='accession' value='" + accession + "'>"
+#**********************************************************
+
+
+html += "<h4 class= 'table-heading' >DNA Sequence: </h4>\n"
+html += "<p1> Coding region has been highlighted. <br>By choosing a Retriction Enzyme, a star will appear in the DNA sequence below. This star will indicate that the Restriction Enzyme cuts at particular site.</p1>\n"
+html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>\n"
+html += "<input type='hidden' id='accession' name='accession' value='" + accession + "'>\n"
+
 
 #Restriction Enzyme table
-html += "<table id ='t01'>"
-html += "<tr><th>Restriction enzyme</th>"
+
+html += "<table class = 'reztable'>\n"
+html += "<tr>\n"
+html += "<th>Restriction enzyme</th>\n"
 html += "</tr>\n"
-html += "<tr>"
-html += "<td>" + entry['rez'] + "</td>"
-html += "</tr>"
-html += "</table>"
+html += "<tr>\n"
+html += "<td>" + entry['rez'] + "</td>\n"
+html += "</tr>\n"
+html += "</table>\n"
+
 
 #drop down for restriction enzyme
-html += """
-	<select name = "rez">
-        <option value = "Restriction enzyme list">Choose Restriction enzyme</option>
-	<option value = "EcoRI">EcoRI</option>
-	<option value = "BamHI">BamHI</option>
-	<option value = "BsuMI">BsuMI</option>
-	<option value = "KpnI">KpnI</option>
-	<option value = "EcoRV">EcoRV</option>
-	<option value = "SmaI">SmaI</option>
-	<option value = "MscI">MscI</option>
-	</select>
-	<input type = "submit" value = "Submit"/>
-	</form>
-"""
+
+html += " <select name = 'rez'>\n"
+html += " <option value = 'Restriction enzyme list'>Choose Restriction enzyme</option>\n"
+html += " <option value = 'EcoRI'>EcoRI</option>\n"
+html += " <option value = 'BamHI'>BamHI</option>\n"
+html += " <option value = 'BsuMI'>BsuMI</option>\n"
+html += " <option value = 'KpnI'>KpnI</option>\n"
+html += " <option value = 'EcoRV'>EcoRV</option>\n"
+html += " <option value = 'SmaI'>SmaI</option>\n"
+html += " <option value = 'MscI'>MscI</option>\n"
+html += " </select>\n"
+html += " <input type = 'submit' value = 'Submit'/>\n"
+html += " </form>\n"
+
+
+
 #DNA sequence with coding region highlighted
-html += "<div Class {height:auto;} style='width:1000px;font-size: 11px; word-wrap:break-word;'>"
+html += "<div id = 'dna-seq'>\n"
 html += entry['dna_seq']
-html += "</div>"
-html += "</hr\n>"
+html += "</div>\n"
+
 
 
 #Total codon usasge in this Gene
-html += "<hr\n>"
-html += "<h2>Codon usage in this Gene </h2>"
-html += "<table id ='t01'>"
-html += "<tr><th>Codon</th>"
-html += "<th>Frequency</th>"
-temp = []
+
+html += "<h4 class= 'table-heading'>Codon usage in this Gene </h4>\n"
+html += "<table class= 'codon'>\n"
+html += "<tr>\n"
+html += "<th>Codon</th>\n"
+html += "<th>Frequency</th>\n"
+#temp = []
 for key, value in entry['freq'].items():    
 
-    html += "<tr>"
-    html += "<td>"+key+ "</td>"
-    html += "<td>"+ value+"</td>"
-    html += "</tr>"
+    html += "<tr>\n"
+    html += "<td>"+key+ "</td>\n"
+    html += "<td>"+ value+"</td>\n"
+    html += "</tr>\n"
 html += "</table>\n"
-html += "</body>"
-html += htmlutils.footer()
+
+
 
 #Total codon usasge in this Chromosome
-html += "<h2>Total Codon usage in Chromosome 6</h2>"
-html += "<table id ='t01'>"
-html += "<tr><th>Codon</th>"
-html += "<th>Frequency</th>"
-cod = []
+
+html += "<h4 class= 'table-heading' >Total Codon usage in Chromosome 6</h4>\n"
+html += "<table class= 'codon'>\n"
+html += "<tr>\n"
+html += "<th>Codon</th>\n"
+html += "<th>Frequency</th>\n"
+#cod = []
 for key, value in entry['total_freq'].items():    
 
-    html += "<tr>"
-    html += "<td>"+key+ "</td>"
-    html += "<td>"+ value+"</td>"
-    html += "</tr>"
+    html += "<tr>\n"
+    html += "<td>"+key+ "</td>\n"
+    html += "<td>"+ value+"</td>\n"
+    html += "</tr>\n"
 html += "</table>\n"
 
-html += "</body>\n"
-html += "</html>\n>"
 html += htmlutils.footer()
-
-
-print(html)  
+print(html)
