@@ -47,7 +47,7 @@ import unittest
 import sys
 import cgi
 class htmlTestCase(unittest.TestCase):
-    def test_html(self, MSG, file = sys.stdout):
+    def test_html(self, file = sys.stdout):
         
         
         print ("Content-Type: text/html\n")
@@ -111,6 +111,6 @@ class htmlTestCase(unittest.TestCase):
     html += htmlutils.footer()
 
     #print(html)   
-print(MSG, file=file)
+
 if __name__ == '__main__':
     unittest.main()
