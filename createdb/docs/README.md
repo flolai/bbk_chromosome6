@@ -37,7 +37,7 @@ location	VARCHAR(20) NOT NULL,
 cds		MEDIUMTEXT NOT NULL,  
 protein_seq	MEDIUMTEXT NOT NULL,  
 dna_seq	MEDIUMTEXT NOT NULL,  
-PRIMARY KEY (accession)
+PRIMARY KEY (accession)  
 );  
 	
 Once data has been loaded into table add index with below statement:
