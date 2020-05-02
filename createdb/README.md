@@ -2,7 +2,9 @@ Biocomputing II / createdb
 ==========================
 
 This directory contains the parser to populate the database from the
-provided Genbank file.
+provided Genbank file. Program originally written by Florence to calculate codon frequency.  Edited by 
+Oliver Cant to parse genebank data. 
+
 
 The parser reads all the genbank entries for chromosome 6 and for each entry extracts the following:
 Accession number    
