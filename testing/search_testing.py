@@ -54,10 +54,6 @@ class htmlTestCase(unittest.TestCase):
         sys.path.insert(0, "/d/user6/az001/db/") #Config file saved in db folder
 
 
-    
-
-
-
 # Grab the content of the form
         form = cgi.FieldStorage()
 
