@@ -4,7 +4,7 @@ Program:    Search CGi Script
 File:       search.py
 
 Version:    V9.0
-Date:       02.05.2020
+Date:       03.05.2020
 Function:   Obtains accession and rez entries from the BL layer and formats them for 
 	    HTML display.
 
@@ -46,6 +46,7 @@ import blapi      # Import the Business Logic API
 import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 import dbapi      # Import the Datbase API
+
 import pandas as pd
 import cgi 
 
@@ -80,21 +81,30 @@ html += htmlutils.navigation()
 
 # detail table
 
-html += htmlutils.detailtable()
-html += "<td>"+entry['accession']+ "</td>\n"
-html += "<td>"+entry['gene_id'] + "</td>\n"	
-html += "<td>"+entry['product'] + "</td>\n"
-html += "<td>"+entry['location'] + "</td>\n"
-html += "<td>"+entry['cds'] + "</td>\n"
-html += "</tr>\n"
-html += "</table>\n"
+
+html += "    <h4 class = 'detail-heading'> Detail page: </h4>\n"
+html += "    <div class= 'page'>\n"
+html += "       <table class = 'detail'>\n"
+html += "          <tr>\n"
+html += "            <th>Genbank Accession</th>\n"
+html += "            <th>Gene Identifier</th>\n"
+html += "            <th>Protein Product</th>\n"
+html += "            <th>Chromosomal Location</th>\n"
+html += "            <th>Coding Region - CDS</th>\n"
+html += "           </tr>\n"
+html += "           <tr>\n"
+html += "             <td>"+entry['accession']+ "</td>\n"
+html += "             <td>"+entry['gene_id'] + "</td>\n"	
+html += "             <td>"+entry['product'] + "</td>\n"
+html += "             <td>"+entry['location'] + "</td>\n"
+html += "             <td>"+entry['cds'] + "</td>\n"
+html += "           </tr>\n"
+html += "        </table>\n"
 
 #Text area for Amino acid sequences
 
 html += "<h4 class= 'table-heading'>Amino Acid Sequence:</h4>\n"
-html += "<textarea class ='amino-acid' readonly>\n"
-html += entry['protein_seq']
-html += "</textarea>\n"
+html += "<textarea class ='amino-acid' readonly cols='45'rows='10'>" +entry['protein_seq']+ "</textarea>\n"
 
 
 #**********************************************************
@@ -112,18 +122,10 @@ html += "<input type='hidden' id='accession' name='accession' value='" + accessi
 
 #Restriction Enzyme table
 
-html += "<table class = 'reztable'>\n"
-html += "<tr>\n"
-html += "<th>Restriction enzyme</th>\n"
-html += "</tr>\n"
-html += "<tr>\n"
-html += "<td>" + entry['rez'] + "</td>\n"
-html += "</tr>\n"
-html += "</table>\n"
-
 
 #drop down for restriction enzyme
 
+#html += "<input type='radio' id='drop' name='rez'>\n"
 html += " <select name = 'rez'>\n"
 html += " <option value = 'Restriction enzyme list'>Choose Restriction enzyme</option>\n"
 html += " <option value = 'EcoRI'>EcoRI</option>\n"
@@ -134,15 +136,23 @@ html += " <option value = 'EcoRV'>EcoRV</option>\n"
 html += " <option value = 'SmaI'>SmaI</option>\n"
 html += " <option value = 'MscI'>MscI</option>\n"
 html += " </select>\n"
+
+
+#html += "<input type='radio' id='seq'name='rez' checked='checked''>\n"
+#html += "<p><b>Sequence by sequence:</b><br /> <textarea name='rez' cols='10' rows='2'></textarea></p>\n"
+
+
+
+
+
 html += " <input type = 'submit' value = 'Submit'/>\n"
+html += "<input type='reset' value='Clear'/>\n"
 html += " </form>\n"
 
 
-
+html += "<div class = 'dna-info'>  Restriction Enzyme : " + entry['rez'] + "</div>\n"
 #DNA sequence with coding region highlighted
-html += "<div id = 'dna-seq'>\n"
-html += entry['dna_seq']
-html += "</div>\n"
+html += "<div id = 'dna-seq'> "+ entry['dna_seq']+"</div>\n"
 
 
 #******************************************************
@@ -178,21 +188,65 @@ df3 = df3[['Codon', 'Freq', 'Total Freq']]
 # Frequency of codon usage in particular gene vs chromosome six
 
 html += "<h4 class= 'table-heading'>Codon usage frequencies in this gene vs in Chromosome Six </h4>\n"
+
+html += "<div class='codondiv'>\n"
 html += "<table class= 'codon'>\n"
+html += "<tbody>\n"
 html += "<tr>\n"
 html += "<th>Codon</th>\n"
 html += "<th>Frequency</th>\n"
 html += "<th>Total Frequency</th>\n"
-for _ in range(0,len(df3)):
+html += "</tr><tr>\n"
 
+html += "</tr><tr>\n"
+html += "<th>Codon</th>\n"
+html += "<th>Frequency</th>\n"
+html += "<th>Total Frequency</th>\n"
+html += "</tr><tr>\n"
+
+html += "</tr><tr>\n"
+html += "<th>Codon</th>\n"
+html += "<th>Frequency</th>\n"
+html += "<th>Total Frequency</th>\n"
+html += "</tr>\n"
+
+html += "</tbody>\n"
+html += "</table>\n"
+html += "</div>\n"
+
+
+html += "<div class='codondiv'>\n"
+html += "<table class = 'codon'>\n"
+html += "<tbody>\n"
+
+for _ in range(0,len(df3)):
+    
+   
     html += "<tr>\n"
     html += "<td>"+ df3['Codon'][_]+"</td>\n"
     html += "<td>"+ df3['Freq'][_]+"</td>\n"
     html += "<td>"+ df3['Total Freq'][_]+"</td>\n"
     html += "</tr>\n"
+
+html += "<tr class='hiddenrow'>\n"
+html += "<th>Codon</th>\n"
+html += "<th>Frequency</th>\n"
+html += "<th>Total Frequency</th>\n"
+html += "</tr>\n"
+html += "</tbody>\n"
 html += "</table>\n"
+html += "</div>\n"
 
 
+
+'''
+
+html += "<table class= 'codon'>\n"
+html += "<tr>\n"
+html += "<th>Codon</th>\n"
+html += "<th>Frequency</th>\n"
+html += "<th>Total Frequency</th>\n"
+'''
 
 html += htmlutils.footer()
 print(html)
