@@ -202,3 +202,13 @@ p1{
 	margin-top :10px;
 }
 
+.codondiv {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+}
+
+.hiddenrow {
+    visibility: hidden !important;
+}
+
