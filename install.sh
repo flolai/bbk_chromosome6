@@ -1,5 +1,5 @@
-html=/var/www/html/biocomp2
-cgi=/var/www/cgi-bin/biocomp2
+html=/var/WWW/html/biocomp2
+cgi=/var/WWW/cgi-bin/biocomp2
 
 mkdir -p $html
 mkdir -p $cgi
