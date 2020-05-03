@@ -8,9 +8,9 @@ Should any other user would like to install the genome browesr other than the cu
 4. In the ```bbk_chromosome6/createdb``` directory, use ```parse.py``` and save the parsed chromosome 6 data as a text file and insert it into the MYSQL database acccording to the scheme and instruction in ```/createdb/docs``` under 'Load Data Statement'
 5. Edit the ```config.py``` files with the updated database user name and password
 6. In the ```cgi-biocomp2``` directory, it contains the three subdirectories for the three layers of the code
- > ```cgi-biocomp2/cgi``` contains the CGI stripts
- > ```cgi-biocomp2/bl``` contains the business layer code
- > ```cgi-biocomp2/db``` contains the database access layer code
+ - ```cgi-biocomp2/cgi``` contains the CGI stripts
+ - ```cgi-biocomp2/bl``` contains the business layer code
+ - ```cgi-biocomp2/db``` contains the database access layer code
 7. If necessary, the calculation for the total codon frequency can be repeated using ```total_codon_cal.py```which is currently located in ```bbk_chromosome6/cgi-biocomp2/bl``` directory.
 8. All html files, including files in the subdirectory will need to be copied to ```~/www/html/biocomp2```
 9. All python files in ```bbk_chromosome6/cgi-biocomp2/cgi``` will need to be copied to ```~/www/cgi-bin/biocomp2```
