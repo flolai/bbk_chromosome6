@@ -14,9 +14,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located
 
 with webdriver.Chrome() as driver:
-    wait = WebDriverWait(driver, 10)
-    first_result = driver.get("http://student.cryst.bbk.ac.uk/~az001/search.html")
-    #driver.find_element(By.NAME, "q").send_keys("cheese" + Keys.RETURN)
-    #first_result = wait.until(presence_of_element_located((By.CSS_SELECTOR, "h3>div")))
-    print(first_result.get_attribute("textContent"))
+    driver.get("http://www.google.com")
+    search_form = driver.find_element(By.TAG_NAME, "form")
+    search_box = search_form.find_element(By.NAME, "q")
+    search_box.send_keys("webdriver")
   
+    for e in search_form:
+        print (e.text)
