@@ -20,7 +20,7 @@ The data is returned as list of lists, with each item enclosed by ‘’ and end
 
 #### Filtering
 The following entries are filtered out of the database by the parser:  
-1.	Entries with non-standard amino acids in the DNA sequence   
+1.	Entries with non-standard bases in the DNA sequence   
 2.	For entries with multiple CDS features only the first CDS feature is taken  
 3.	Entries with mutations and variations and alternative splicing  
 
