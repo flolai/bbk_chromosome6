@@ -3,8 +3,8 @@
 Program:    Search CGi Script
 File:       search.py
 
-Version:    V9.0
-Date:       03.05.2020
+Version:    V8.0
+Date:       02.05.2020
 Function:   Obtains accession and rez entries from the BL layer and formats them for 
 	    HTML display.
 
@@ -59,11 +59,10 @@ form = cgi.FieldStorage()
 
 
 
-#***********************************************************************************************************************************************************************************************
-
+#******************************************************************************************************************************************************************
 # MAIN PROGRAMME FOR DETAIL PAGE 
 
-#***********************************************************************************************************************************************************************************************
+#******************************************************************************************************************************************************************
 
 
 accession = form.getvalue("accession")
@@ -104,7 +103,7 @@ html += "        </table>\n"
 #Text area for Amino acid sequences
 
 html += "<h4 class= 'table-heading'>Amino Acid Sequence:</h4>\n"
-html += "<textarea class ='amino-acid' readonly cols='45'rows='10'>" +entry['protein_seq']+ "</textarea>\n"
+html += "<textarea class ='amino-acid' readonly cols='45' rows='10'>" +entry['protein_seq']+ "</textarea>\n"
 
 
 #**********************************************************
@@ -126,6 +125,7 @@ html += "<input type='hidden' id='accession' name='accession' value='" + accessi
 #drop down for restriction enzyme
 
 #html += "<input type='radio' id='drop' name='rez'>\n"
+html += "<div class= 'dropdown'>\n"
 html += " <select name = 'rez'>\n"
 html += " <option value = 'Restriction enzyme list'>Choose Restriction enzyme</option>\n"
 html += " <option value = 'EcoRI'>EcoRI</option>\n"
@@ -136,19 +136,48 @@ html += " <option value = 'EcoRV'>EcoRV</option>\n"
 html += " <option value = 'SmaI'>SmaI</option>\n"
 html += " <option value = 'MscI'>MscI</option>\n"
 html += " </select>\n"
+html += " <input type = 'submit' value = 'Submit'/>\n"
+html += " <input type='reset' value='Clear'/>\n"
+html += " </div>\n"
+html += " </form>\n"
+
+#search by sequence
+
+html += " <form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>\n"
+html += " <input type='hidden' id='accession' name='accession' value='" + accession + "'>\n"
+
+html += " <div class= 'seq-search'>\n"
+html += " <input list='enz' name='rez'>\n"
+html += " <datalist id='enz'>\n"
+html += " <option value = 'GAATTC'>GAATTC</option>\n"
+html += " <option value = 'GGATCC'>GGATCC</option>\n"
+html += " <option value = 'CTCGAG'>CTCGAG</option>\n"
+html += " <option value = 'GGTACC'>GGTACC</option>\n"
+html += " <option value = 'GATATC'>GATATC</option>\n"
+html += " <option value = 'CCCGGG'>CCCGGG</option>\n"
+html += " <option value = 'TGGCCA'>TGGCCA</option>\n"
+html += " </datalist>\n"
+html += " <input type='submit' value = 'Submit'/>\n"
+html += " <input type='reset' value='Clear'/>\n"
+html += " </div>\n"
+html += " </form>\n"
+
+
 
 
 #html += "<input type='radio' id='seq'name='rez' checked='checked''>\n"
-#html += "<p><b>Sequence by sequence:</b><br /> <textarea name='rez' cols='10' rows='2'></textarea></p>\n"
-
-
-
-
+#html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>\n"
+#html += "<textarea value = 'GAATTC' name='rez' cols='10' rows='2'></textarea></p>\n"
+'''
+html += "<div class= 'seq-search'>"
+html += "<p>Search by sequence:</p>"
+html += "<input name='rez' placeholder='Type sequence...'>"
+html += "<div>"
 
 html += " <input type = 'submit' value = 'Submit'/>\n"
 html += "<input type='reset' value='Clear'/>\n"
 html += " </form>\n"
-
+'''
 
 html += "<div class = 'dna-info'>  Restriction Enzyme : " + entry['rez'] + "</div>\n"
 #DNA sequence with coding region highlighted
@@ -188,69 +217,24 @@ df3 = df3[['Codon', 'Freq', 'Total Freq']]
 # Frequency of codon usage in particular gene vs chromosome six
 
 html += "<h4 class= 'table-heading'>Codon usage frequencies in this gene vs in Chromosome Six </h4>\n"
-
-html += "<div class='codondiv'>\n"
 html += "<table class= 'codon'>\n"
-html += "<tbody>\n"
 html += "<tr>\n"
 html += "<th>Codon</th>\n"
 html += "<th>Frequency</th>\n"
 html += "<th>Total Frequency</th>\n"
-html += "</tr><tr>\n"
-
-html += "</tr><tr>\n"
-html += "<th>Codon</th>\n"
-html += "<th>Frequency</th>\n"
-html += "<th>Total Frequency</th>\n"
-html += "</tr><tr>\n"
-
-html += "</tr><tr>\n"
-html += "<th>Codon</th>\n"
-html += "<th>Frequency</th>\n"
-html += "<th>Total Frequency</th>\n"
-html += "</tr>\n"
-
-html += "</tbody>\n"
-html += "</table>\n"
-html += "</div>\n"
-
-
-html += "<div class='codondiv'>\n"
-html += "<table class = 'codon'>\n"
-html += "<tbody>\n"
-
 for _ in range(0,len(df3)):
-    
-   
+
     html += "<tr>\n"
     html += "<td>"+ df3['Codon'][_]+"</td>\n"
     html += "<td>"+ df3['Freq'][_]+"</td>\n"
     html += "<td>"+ df3['Total Freq'][_]+"</td>\n"
     html += "</tr>\n"
-
-html += "<tr class='hiddenrow'>\n"
-html += "<th>Codon</th>\n"
-html += "<th>Frequency</th>\n"
-html += "<th>Total Frequency</th>\n"
-html += "</tr>\n"
-html += "</tbody>\n"
 html += "</table>\n"
-html += "</div>\n"
 
 
-
-'''
-
-html += "<table class= 'codon'>\n"
-html += "<tr>\n"
-html += "<th>Codon</th>\n"
-html += "<th>Frequency</th>\n"
-html += "<th>Total Frequency</th>\n"
-'''
 
 html += htmlutils.footer()
 print(html)
-
 
 
 #print(df3)
