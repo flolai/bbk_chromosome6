@@ -3,8 +3,8 @@
 Program:    HTMLUTILS script
 File:       htmlutils.py
 
-Version:    V1.0
-Date:       01.05.2020
+Version:    V2.0
+Date:       03.04.2020
 Function:   Support code for generating HTML files
 
 Copyright:  (c) Maham Ahmad, Birckbeck, 2020
@@ -16,12 +16,11 @@ This program is released under the GNU Public Licence (GPL V3)
 ============
 Description:
 ============
-This code is the support code for CGI scripts, helping in generating HTML files.
 
-=================
+
 Revision History:
 =================
-V1.0   	01.05.20   Original   By: Maham Ahmad
+V1.0   	01.04.20   Original   By: Maham Ahmad
 
 """
 
@@ -48,8 +47,6 @@ def header():
 
 
 
-
- 
 def navigation():
 
     """
@@ -70,27 +67,6 @@ def navigation():
     return(html)
 
 
-
-  
-def detailtable():
-
-    """
-    This function generates HTML code for the detail page table on search.py
-    """
-
-    html  = "    <h4 class = 'detail-heading'> Detail page: </h4>\n"
-    html += "    <div class= 'page'>\n"
-    html += "       <table class = 'detail'>\n"
-    html += "          <tr>\n"
-    html += "            <th>Genbank Accession</th>\n"
-    html += "            <th>Gene Identifier</th>\n"
-    html += "            <th>Protein Product</th>\n"
-    html += "            <th>Chromosomal Location</th>\n"
-    html += "            <th>Coding Region - CDS</th>\n"
-    html += "           </tr>\n"
-    html += "           <tr>\n"
-
-    return(html)
 
 def footer():
 
