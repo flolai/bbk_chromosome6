@@ -4,7 +4,7 @@ Program:    Search CGi Script
 File:       search.py
 
 Version:    V8.0
-Date:       02.05.2020
+Date:       04.05.2020
 Function:   Obtains accession and rez entries from the BL layer and formats them for 
 	    HTML display.
 
@@ -17,23 +17,32 @@ This program is released under the GNU Public Licence (GPL V3)
 ============
 Description:
 ============
-This CGI script  displays the search results - a detailed page of the gene searched using
-Genbank Accession,Gene Identifier, Protein Product or Chromosomal Location.
+This CGI script  displays the search results - a detailed page of the gene that is searched
+using Genbank Accession, Gene Identifier, Protein Product or Chromosomal Location.
 
 Detail page includes:
 =====================
 
 Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal
-Location, Coding region-CDS, DNA sequences-with coding regions highlighted and star
-indicating where the restriction enzyme cuts and codon frequency.
+Location, Coding region-CDS, DNA sequence-with coding regions highlighted and star
+indicating where the restriction enzyme cuts and codon frequencies.
 
 =================
 Revision History:
 =================
-V1.0   	15.04.20   Original   By: Maham Ahmad
+V1.0   	10.04.2020  Original   By: Maham Ahmad
+V2.0   	15.04.2020   
+V3.0   	16.04.2020   
+V4.0   	16.04.2020   
+V5.0   	17.04.2020   
+V6.0   	18.04.2020     
+V7.0   	02.05.2020
+V8.0    04.05.2020      
 
 
 """
+#******************************************************************************************************************************************************************
+import cgi 
 
 # Add the bl sub-directory to the module path
 # and the directory above to import the config file
@@ -47,16 +56,19 @@ import htmlutils  # Import HTML utilities
 import config     # Import configuration information (e.g. URLs)
 import dbapi      # Import the Datbase API
 
-import pandas as pd
-import cgi 
+import pandas as pd #Import panda for table merge
 
 # Useful debugging output
 import cgitb
 cgitb.enable()  # Send errors to browser
 
+#******************************************************************************************************************************************************************
 # Grab the content of the form
 form = cgi.FieldStorage()
 
+accession = form.getvalue("accession")
+enzyme = form.getvalue("rez")
+entry = blapi.getEntry(accession, enzyme)
 
 
 #******************************************************************************************************************************************************************
@@ -64,41 +76,33 @@ form = cgi.FieldStorage()
 
 #******************************************************************************************************************************************************************
 
-
-accession = form.getvalue("accession")
-enzyme = form.getvalue("rez")
-entry = blapi.getEntry(accession, enzyme)
-
-
-
-
 # Header and navigation
 
-html    = htmlutils.header()
+html  = htmlutils.header()
 html += htmlutils.navigation()
 
 
 # detail table
 
 
-html += "    <h4 class = 'detail-heading'> Detail page: </h4>\n"
-html += "    <div class= 'page'>\n"
-html += "       <table class = 'detail'>\n"
-html += "          <tr>\n"
-html += "            <th>Genbank Accession</th>\n"
-html += "            <th>Gene Identifier</th>\n"
-html += "            <th>Protein Product</th>\n"
-html += "            <th>Chromosomal Location</th>\n"
-html += "            <th>Coding Region - CDS</th>\n"
-html += "           </tr>\n"
-html += "           <tr>\n"
-html += "             <td>"+entry['accession']+ "</td>\n"
-html += "             <td>"+entry['gene_id'] + "</td>\n"	
-html += "             <td>"+entry['product'] + "</td>\n"
-html += "             <td>"+entry['location'] + "</td>\n"
-html += "             <td>"+entry['cds'] + "</td>\n"
-html += "           </tr>\n"
-html += "        </table>\n"
+html += "<h4 class = 'detail-heading'> Detail page: </h4>\n" 
+html += "<div class= 'page'>\n"
+html += "<table class = 'detail'>\n" 
+html += "<tr>\n"
+html += "<th>Genbank Accession</th>\n"
+html += "<th>Gene Identifier</th>\n"
+html += "<th>Protein Product</th>\n"
+html += "<th>Chromosomal Location</th>\n"
+html += "<th>Coding Region - CDS</th>\n"
+html += "</tr>\n"
+html += "<tr>\n"
+html += "<td>"+entry['accession']+ "</td>\n"
+html += "<td>"+entry['gene_id'] + "</td>\n"	
+html += "<td>"+entry['product'] + "</td>\n"
+html += "<td>"+entry['location'] + "</td>\n"
+html += "<td>"+entry['cds'] + "</td>\n"
+html += "</tr>\n"
+html += "</table><!-- end of detail table -->\n"
 
 #Text area for Amino acid sequences
 
@@ -106,89 +110,60 @@ html += "<h4 class= 'table-heading'>Amino Acid Sequence:</h4>\n"
 html += "<textarea class ='amino-acid' readonly cols='45' rows='10'>" +entry['protein_seq']+ "</textarea>\n"
 
 
-#**********************************************************
+#******************************************************************************************************************************************************************
 
-# DNA sequence and resitriction enzyme 
+# DNA sequence and restriction enzyme 
 
-#**********************************************************
+#******************************************************************************************************************************************************************
 
 
 html += "<h4 class= 'table-heading' >DNA Sequence: </h4>\n"
-html += "<div class = 'dna-info'> Coding region has been highlighted. <br>By choosing a Retriction Enzyme, a star will appear in the DNA sequence below. This star will indicate that the Restriction Enzyme cuts at particular site.</div>\n"
+html += "<div class = 'info'> Coding region has been highlighted.\n"
+html += "<ul>\n"
+html += "<li>By choosing a Retriction Enzyme, a star will appear in the DNA sequence below.</li>\n"
+html += "<li>This star will indicate that the Restriction Enzyme cuts at this particular site or sites.</li>\n"
+html += "</ul>\n"
+html += "</div>\n"
 html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>\n"
 html += "<input type='hidden' id='accession' name='accession' value='" + accession + "'>\n"
 
 
-#Restriction Enzyme table
 
+# Drop down for restriction enzyme
 
-#drop down for restriction enzyme
+html += "<div class= 'dropdown'><!-- Dropdown for restriction enzyme -->\n"
+html += "<select name = 'rez'>\n"
+html += "<option value = 'Restriction enzyme list'>Choose Restriction enzyme</option>\n"
+html += "<option value = 'EcoRI'>EcoRI</option>\n"
+html += "<option value = 'BamHI'>BamHI</option>\n"
+html += "<option value = 'BsuMI'>BsuMI</option>\n"
+html += "<option value = 'KpnI'>KpnI</option>\n"
+html += "<option value = 'EcoRV'>EcoRV</option>\n"
+html += "<option value = 'SmaI'>SmaI</option>\n"
+html += "<option value = 'MscI'>MscI</option>\n"
+html += "</select>\n"
+html += "<input type = 'submit' value = 'Submit'/>\n"
+html += "</div>\n"
+html += "</form>\n"
 
-#html += "<input type='radio' id='drop' name='rez'>\n"
-html += "<div class= 'dropdown'>\n"
-html += " <select name = 'rez'>\n"
-html += " <option value = 'Restriction enzyme list'>Choose Restriction enzyme</option>\n"
-html += " <option value = 'EcoRI'>EcoRI</option>\n"
-html += " <option value = 'BamHI'>BamHI</option>\n"
-html += " <option value = 'BsuMI'>BsuMI</option>\n"
-html += " <option value = 'KpnI'>KpnI</option>\n"
-html += " <option value = 'EcoRV'>EcoRV</option>\n"
-html += " <option value = 'SmaI'>SmaI</option>\n"
-html += " <option value = 'MscI'>MscI</option>\n"
-html += " </select>\n"
-html += " <input type = 'submit' value = 'Submit'/>\n"
-html += " <input type='reset' value='Clear'/>\n"
-html += " </div>\n"
-html += " </form>\n"
+# Display name of enzyme searched 
 
-#search by sequence
+html += "<div class = 'rezinfo'>  RESTRICTION ENZYME : "+ entry['rez'] + "</div>\n"
 
-html += " <form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>\n"
-html += " <input type='hidden' id='accession' name='accession' value='" + accession + "'>\n"
+# DNA sequence with coding region highlighted
 
-html += " <div class= 'seq-search'>\n"
-html += " <input list='enz' name='rez'>\n"
-html += " <datalist id='enz'>\n"
-html += " <option value = 'GAATTC'>GAATTC</option>\n"
-html += " <option value = 'GGATCC'>GGATCC</option>\n"
-html += " <option value = 'CTCGAG'>CTCGAG</option>\n"
-html += " <option value = 'GGTACC'>GGTACC</option>\n"
-html += " <option value = 'GATATC'>GATATC</option>\n"
-html += " <option value = 'CCCGGG'>CCCGGG</option>\n"
-html += " <option value = 'TGGCCA'>TGGCCA</option>\n"
-html += " </datalist>\n"
-html += " <input type='submit' value = 'Submit'/>\n"
-html += " <input type='reset' value='Clear'/>\n"
-html += " </div>\n"
-html += " </form>\n"
+html += "<div id = 'dna-seq'> "+ entry['dna_seq']+"</div><!-- end of DNA sequence -->\n"
 
 
 
-
-#html += "<input type='radio' id='seq'name='rez' checked='checked''>\n"
-#html += "<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py' method='get'>\n"
-#html += "<textarea value = 'GAATTC' name='rez' cols='10' rows='2'></textarea></p>\n"
-'''
-html += "<div class= 'seq-search'>"
-html += "<p>Search by sequence:</p>"
-html += "<input name='rez' placeholder='Type sequence...'>"
-html += "<div>"
-
-html += " <input type = 'submit' value = 'Submit'/>\n"
-html += "<input type='reset' value='Clear'/>\n"
-html += " </form>\n"
-'''
-
-html += "<div class = 'dna-info'>  Restriction Enzyme : " + entry['rez'] + "</div>\n"
-#DNA sequence with coding region highlighted
-html += "<div id = 'dna-seq'> "+ entry['dna_seq']+"</div>\n"
-
-
-#******************************************************
+#******************************************************************************************************************************************************************
 
 #Total codon usasge in this Gene vs in chromosome 6
 
-#******************************************************
+#******************************************************************************************************************************************************************
+
+# Merging frequencies of particular gene with frequencies in chromosome 6 using pandas
+
 dictlist = []
 for key, value in entry['freq'].items(): 
 	cod = key
@@ -214,7 +189,7 @@ df2['Codon'] = df2['Codon'].str.strip()
 df3 = df.merge(df2, left_on ='Codon', right_on='Codon')
 df3 = df3[['Codon', 'Freq', 'Total Freq']]
 
-# Frequency of codon usage in particular gene vs chromosome six
+# Frequency of codon usage in particular gene vs in chromosome six
 
 html += "<h4 class= 'table-heading'>Codon usage frequencies in this gene vs in Chromosome Six </h4>\n"
 html += "<table class= 'codon'>\n"
@@ -229,12 +204,12 @@ for _ in range(0,len(df3)):
     html += "<td>"+ df3['Freq'][_]+"</td>\n"
     html += "<td>"+ df3['Total Freq'][_]+"</td>\n"
     html += "</tr>\n"
-html += "</table>\n"
+html += "</table><!-- end of codon usage table table -->\n"
 
-
+# Footer
 
 html += htmlutils.footer()
 print(html)
 
 
-#print(df3)
+
