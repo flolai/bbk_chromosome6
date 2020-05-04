@@ -45,9 +45,6 @@ V7.0   	19.04.2020
 V8.0   	02.05.2020  
 V9.0   	04.05.2020      
 
-
-
-
 """
 #******************************************************************************************************************************************************************
 import cgi
@@ -103,7 +100,9 @@ html += "<th>Gene Identifier</th>\n"
 html += "<th>Protein Product</th>\n"
 html += "<th>Chromosomal Location</th>\n"
 html += "</tr>\n"
-for _ in entries:	
+
+for _ in entries:
+	
 	html += "<tr>\n"
 	html += "<td><a href='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/search.py?accession={}' method='get'>".format(_['accession'])+ _['accession']+ "</a></td>\n" 
 	html += "<td>"+_['gene_id'] + "</td>\n"	
