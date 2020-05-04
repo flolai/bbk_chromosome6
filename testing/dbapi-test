@@ -50,7 +50,7 @@ class TestGetEntries(unittest.TestCase):
             AttributeError - 'no attribute getAllEntries'
         """
         self.assertRaises(Exception, e, "Exception occured:{}".format(e))
-	    self.assertEqual(self.all_gene_records, dbapi.getAllEntries(AB006907))
+        self.assertEqual(self.all_gene_records, dbapi.getAllEntries(AB006907))
 
 
 
