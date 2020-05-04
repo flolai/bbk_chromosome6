@@ -117,7 +117,6 @@ img{
 	text-align:center;
 	font-weight: bold;
 	width: 100%;
-	
 }
 
 /** search html search table, bar and button**/
@@ -165,6 +164,7 @@ img{
 
 
 /*Table styling for listall.py */
+
 h3{
 	font-family: 'Poppins', sans-serif;
 	font-size:50px;
@@ -211,6 +211,7 @@ h3 {
 }
 
 /** listall.py whole page **/
+
 .summary-page{
 	margin-left: 80px;
 }
@@ -260,15 +261,20 @@ h3 {
 }
 
 /** search.py dna info points**/
+
 .info{
 	font-family: 'Poppins', sans-serif;
 	font-size: 80%;
 	margin-top :10px;
 	margin-bottom :25px;
-
+	font-weight: bold;
+ 	outline: 1px solid black;
+	outline-offset: 3px;
+	padding: 10px;
 }
 
 /** search.py restriction enzyme dropdown **/
+
 .dropdown{
 	margin-bottom :10px;
 	font-weight: bold;
@@ -282,6 +288,7 @@ h3 {
 	font-family: 'Poppins', sans-serif;
 	font-size: 90%;
 	font-weight: bold;
+	text-decoration: underline;
 }
 
 
@@ -294,6 +301,8 @@ h3 {
 	width:auto;
 	font-size: 11px;
    	word-wrap:break-word;
+	outline: 1px solid black;
+	outline-offset: 10px;
 }
 
 /** search.py headings on this page**/
@@ -303,4 +312,5 @@ h3 {
 	margin-bottom: 5px;
 	font-size: 120%;
 	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
 }
