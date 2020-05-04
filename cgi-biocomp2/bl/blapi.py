@@ -35,7 +35,6 @@ sys.path.insert(0, "../")
 
 import re  
 import dbapi   # Import the database api
-#import config  # Import configuration information
 
 from config import total_codon_freq
 #total_codon_freq = config.total_codon_freq
@@ -142,8 +141,9 @@ def getEntry(accession, rez = ''):
     for start,end in cds_pairs:
         start = start-1         
         cds_in_dna += dna_seq[start:end]
-        dna_seq = dna_seq[:start]+ '<mark>' + dna_seq[start:end].lower() + '</mark>' + dna_seq[end:]
-        
+#        dna_seq = dna_seq[:start]+ '<mark>' + dna_seq[start:end].lower() + '</mark>' + dna_seq[end:]
+        dna_seq = dna_seq[:start]+ '<' + dna_seq[start:end].lower() + '>' + dna_seq[end:]
+       
 #adding tags for restriction enzymes
         
     if rez == 'EcoRI'and 'GAATTC' in dna_seq :  
@@ -168,7 +168,7 @@ def getEntry(accession, rez = ''):
         dna_seq = dna_seq.replace('TGGCCA', 'TGG|CCA')  
       
     dna_seq = dna_seq.upper()
-    dna_seq = dna_seq.replace('|', '<span class = "re">&starf;</span>')
+#    dna_seq = dna_seq.replace('|', '<span class = "re">&starf;</span>')
 #calculating cds codon frequency
         
     codon_in_gene = []        

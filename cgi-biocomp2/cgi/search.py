@@ -151,7 +151,9 @@ html += "</form>\n"
 html += "<div class = 'rezinfo'>  RESTRICTION ENZYME : "+ entry['rez'] + "</div>\n"
 
 # DNA sequence with coding region highlighted
-
+entry['dna_seq'] = entry['dna_seq'].replace('|', '<span class = "re">&starf;</span>') 
+entry['dna_seq'] = entry['dna_seq'].replace('<', '<mark>')
+entry['dna_seq'] = entry['dna_seq'].replace('>', '</mark>')
 html += "<div id = 'dna-seq'> "+ entry['dna_seq']+"</div><!-- end of DNA sequence -->\n"
 
 
