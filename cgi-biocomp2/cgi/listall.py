@@ -3,9 +3,9 @@
 Program:    List all CGi Script
 File:       listall.py
 
-Version:    V12.0
-Date:       30.04.2020
-Function:   Obtains all the entries from the BL layer and formats them for 
+Version:    V9.0
+Date:       04.05.2020
+Function:   Obtains entries from the BL layer and formats them for 
 	    HTML display as a table.
 
 Copyright:  (c) Maham Ahmad, Birckbeck, 2020
@@ -20,30 +20,38 @@ Description:
 This CGI script  displays a summary table when Genbank Accession, Gene Identifier,
 Protein product or chromosomal location is searched on search html page. This CGI 
 script also displays summary table of all the genes in chromosome 6, when on the 
-gene summary html page, with Genbank Accession, Gene Identifier, Protein product and
+gene summary page, with Genbank Accession, Gene Identifier, Protein product and
 chromosomal location being the column headers. 
 
 As Genbank Accession is unique, one entry in a table will be returned whereas for 
-Gene Identifier,Protein product or chromosomal location one or more entries in a table
+Gene Identifier, Protein product or chromosomal location one or more entries in a table
 can be returned. This CGI script also allows users to select any Genbank Accession cell
 which will take user to detail page of that gene; detail page will display
 Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal
 Location, Coding region-CDS, DNA sequences-with coding regions highlighted and star 
-indicating restriction enzyme cutting site and codon frequency.
+indicating restriction enzyme cutting site and codon frequencies.
 
 ------------------------------------------------------------------------------------------
 
 Revision History:
 =================
-V1.0   	10.04.20   Original   By: Maham Ahmad
+V1.0   	10.04.2020   Original   By: Maham Ahmad
+V2.0   	15.04.2020   
+V3.0   	16.04.2020   
+V4.0   	16.04.2020   
+V5.0   	17.04.2020   
+V6.0   	18.04.2020   
+V7.0   	19.04.2020   
+V8.0   	02.05.2020  
+V9.0   	04.05.2020      
+
 
 
 
 """
-#*****************************************************************************************************************************************************************************************
-# Import libraries
+#******************************************************************************************************************************************************************
 import cgi
-print ("Content-Type: text/html\n")
+
 
 # Add the bl sub-directory to the module path
 # and the directory above to import the config file
@@ -61,7 +69,7 @@ import config     # Import configuration information (e.g. URLs)
 import cgitb
 cgitb.enable()
 
-#*****************************************************************************************************************************************************************************************
+#******************************************************************************************************************************************************************
 
 # Grab the content of the form
 form = cgi.FieldStorage()
@@ -73,7 +81,10 @@ location = form.getvalue("location")
 entries = blapi.getAllEntries(accession = accession, gene_id = gene_id, product = product,location = location)
 
 
+#******************************************************************************************************************************************************************
+# MAIN PROGRAMME FOR DETAIL PAGE 
 
+#******************************************************************************************************************************************************************
 
 # Header and navigation
 
@@ -99,7 +110,10 @@ for _ in entries:
 	html += "<td>"+_['product'] + "</td>\n"
 	html += "<td>"+_['location'] + "</td>\n"
 	html += "</tr>\n"
-html += "</table>\n"
+html += "</table><!-- end of summary table -->\n"
+
+
+# Footer
 
 html += htmlutils.footer()
 
