@@ -142,7 +142,7 @@ def getEntry(accession, rez = ''):
         start = start-1         
         cds_in_dna += dna_seq[start:end]
 #        dna_seq = dna_seq[:start]+ '<mark>' + dna_seq[start:end].lower() + '</mark>' + dna_seq[end:]
-        dna_seq = dna_seq[:start]+ '<' + dna_seq[start:end].lower() + '>' + dna_seq[end:]
+        dna_seq = dna_seq[:start]+ '[' + dna_seq[start:end].lower() + ']' + dna_seq[end:]
        
 #adding tags for restriction enzymes
         
