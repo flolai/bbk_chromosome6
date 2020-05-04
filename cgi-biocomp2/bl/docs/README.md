@@ -54,9 +54,9 @@ This function takes the accession and rez parameters as strings. rez is an optio
 
 The output is the specific record that matches the accession returned as a dictionary.
 
-This function first takes the accession as a string returned from the front end, passes it to the dbapi, returning the record as a dictionary. Then the coding region of the DNA sequence is pre-tagged by this function with ```<mark>``` and ```</mark>``` tags for the front end.
+This function first takes the accession as a string returned from the front end, passes it to the dbapi, returning the record as a dictionary. Then the coding region of the DNA sequence is pre-tagged by this function with ```[``` and ```]``` tags for the front end.
 
-On the detail page (search.py) of the chosen record displayed to the user, the restriction enzyme that could be used to cut the gene can then be chosen. Once the restriction enzyme (returned as a string) is passed to this function, the DNA sequence will be further processed where the location of the cutting site will be pre-tagged with ```<span class = "re">&starf;</span>``` and returned back to the front end for display.
+On the detail page (search.py) of the chosen record displayed to the user, the restriction enzyme that could be used to cut the gene can then be chosen. Once the restriction enzyme (returned as a string) is passed to this function, the DNA sequence will be further processed where the location of the cutting site will be pre-tagged with ```|``` and returned back to the front end for display.
 
 Additionally, the total codon frequency of all the records in chromosome 6 and the chosen record by the user will also be returned to the front end in the same dictionary.
 
@@ -67,7 +67,7 @@ Example data returned from dbapi to use this function :
 'accession': 'AB006907',
 'product': 'HMC class II surface glycoprotein',
 'location': '6p21.3',
-'protein_seq': 'MILNKALMLGALALTTVMSPCGGEDIV','dna_seq':'ATGATCCTAAACAAAGCTCTGATGCT<mark>GGGGGCCCTTG</mark>CCCTGACCACCGTGATGAGCCCCTGT<span class = "re">&starf;</span>GGAGGTGAAGACATTGTGG',
+'protein_seq': 'MILNKALMLGALALTTVMSPCGGEDIV','dna_seq':'ATGATCCTAAACAAAGCTCTGATGCT[GGGGGCCCTTG]CCCTGACCACCGTGATGAGCCCCTGT|GGAGGTGAAGACATTGTGG',
 'cds': '1..82',
 'codon_freq':{'AAA':'0'..'GGG':'0'}, 
 'total_codon_freq':{'AAA': '0'..'GGG':'0'}}
