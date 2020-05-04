@@ -4,16 +4,16 @@
 Program:    Search HTML 
 File:       search.html
 
-Version:    V5.0
-Date:       01.05.2020
+Date:       04.05.2020
 Function:   HTML code displaying Home page of the genome browser
 
 Copyright:  (c) Maham Ahmad, Birckbeck, 2020
 Author:     Maham Ahmad
             
-------------------------------------------------------------------------------------------
+*****************************************************************************************
 This program is released under the GNU Public Licence (GPL V3)
-------------------------------------------------------------------------------------------
+
+*****************************************************************************************
 ============
 Description:
 ============
@@ -43,61 +43,56 @@ Gene summary page
 search page
 
 ================
-Revision History:
+First created:
 =================
-V1.0   	17.04.20   Original   By: Maham Ahmad
-
-
+V1.0   	10.04.20   Original   By: Maham Ahmad
 -->
 <html lang="en">
-	<head>
-		<title>Search Chromosome 6</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta charset="utf-8">
-		<link rel = "stylesheet" href="biocomp2.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
-		<link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	</head>
-
-	<body>
-			<nav>
-				<div class="logo">
-						<h1>Genome<br>browser</h1>
-				</div>
-				<ul class="nav-links">
-						<li><a href="index.html"><i class="fas fa-home home"></i> Home</a></li>
-						<li><a href="search.html"><i class="fas fa-search"></i> Search</a></li>
-						<li><a href="http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/listall.py"><i class="fas fa-th-list"></i> Gene Summary</a></li>
-				</ul>
-			</nav>
-			<form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/listall.py' method='get'>
-			        <p>Search by:</p>
-
-			        <table>
-			          <tr>
-			            <td>Gene Identifier</td>
-			            <td><input type="text" name="gene_id" placeholder="Type to search..."></td>
-			          </tr>
-			          <tr>
-			            <td>Protein Product</td>
-			            <td><input type="text" name="product" placeholder="Type to search..."></td>
-			          </tr>
-			          <tr>
-			            <td>Genbank Accession</td>
-			            <td><input type="text" name="accession" placeholder="Type to search..."></td>
-			          </tr>
-			          <tr>
-			            <td>Chromosomal Location</td>
-			            <td><input type="text" name="location" placeholder="Type to search..."></td>
-			          </tr>
-			        </table>
-
-			        <p><input type='Submit' value='Search' /></p>
-
-			      </form>
-
-	</body>
+<head>
+  <title>Search Chromosome 6</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="biocomp2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <h1> Genome<br>browser</h1>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fas fa-home home"></i> Home</a></li>
+      <li><a href="search.html"><i class="fas fa-search"></i> Search</a></li>
+      <li><a href="http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/listall.py"><i class="fas fa-th-list"></i> Gene Summary</a></li>
+    </ul>
+    </nav>
+    <form action='http://student.cryst.bbk.ac.uk/cgi-bin/cgiwrap/az001/listall.py' method='get'>
+      <div class="search-by">
+        <h2 >Search by:</h2>
+      </div>
+      <table id="searchtable">
+        <tr>
+          <td>Gene Identifier:</td>
+	  <td><input class="search-text" type="text" name="gene_id" placeholder="e.g: TC4"></td>
+	</tr>
+        <tr>
+	  <td>Protein Product:</td>
+	  <td><input class="search-text" type="text" name="product" placeholder="e.g: RAN"></td>
+	</tr>
+	<tr>
+	  <td>Genbank Accession:</td>
+	  <td><input class="search-text" type="text" name="accession" placeholder="e.g: AB088093"></td>
+	</tr>
+	<tr>
+	  <td>Chromosomal Location:</td>
+	  <td><input class="search-text" type="text" name="location" placeholder="e.g: 6p21.31"></td>
+	</tr>
+      </table>
+      <div class='submitbtn'>
+        <p><input type='Submit' value='Search' /></p>
+      </div>
+   </form>
+</body>
 </html>
 
