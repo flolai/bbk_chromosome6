@@ -107,7 +107,7 @@ html += "</table><!-- end of detail table -->\n"
 #Text area for Amino acid sequences
 
 html += "<h4 class= 'table-heading'>Amino Acid Sequence:</h4>\n"
-html += "<textarea class ='amino-acid' readonly cols='45' rows='10'>" +entry['protein_seq']+ "</textarea>\n"
+html += "<textarea class ='amino-acid' readonly cols='45' rows='10'>" +entry['protein_seq']+ "</textarea><!-- Amino Acid Sequence -->\n"
 
 
 #******************************************************************************************************************************************************************
@@ -162,7 +162,7 @@ html += "<div id = 'dna-seq'> "+ entry['dna_seq']+"</div><!-- end of DNA sequenc
 
 #******************************************************************************************************************************************************************
 
-# Merging frequencies of particular gene with frequencies in chromosome 6 using pandas
+# Merging frequencies of chosen gene with frequencies in chromosome 6 using dataframes
 
 dictlist = []
 for key, value in entry['freq'].items(): 
@@ -189,7 +189,7 @@ df2['Codon'] = df2['Codon'].str.strip()
 df3 = df.merge(df2, left_on ='Codon', right_on='Codon')
 df3 = df3[['Codon', 'Freq', 'Total Freq']]
 
-# Frequency of codon usage in particular gene vs in chromosome six
+# Frequency of codon usage in chosen gene vs in chromosome six
 
 html += "<h4 class= 'table-heading'>Codon usage frequencies in this gene vs in Chromosome Six </h4>\n"
 html += "<table class= 'codon'>\n"
@@ -197,6 +197,7 @@ html += "<tr>\n"
 html += "<th>Codon</th>\n"
 html += "<th>Frequency</th>\n"
 html += "<th>Total Frequency</th>\n"
+
 for _ in range(0,len(df3)):
 
     html += "<tr>\n"
@@ -204,7 +205,7 @@ for _ in range(0,len(df3)):
     html += "<td>"+ df3['Freq'][_]+"</td>\n"
     html += "<td>"+ df3['Total Freq'][_]+"</td>\n"
     html += "</tr>\n"
-html += "</table><!-- end of codon usage table table -->\n"
+html += "</table><!-- end of codon usage table -->\n"
 
 # Footer
 
