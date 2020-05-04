@@ -12,7 +12,7 @@ html, body{
 	width: 100%;
 	height: 100%;
 	font-family: 'montserret', sans-serif;
-	background:  	#f1f2f6;
+	background:  #D0D0D0;
 }
 
 nav{
@@ -107,7 +107,17 @@ img{
 	font-family: 'Poppins', sans-serif;
 	font-size: 200%;
 	text-transform: uppercase;
+	letter-spacing: 10px;
 	position: absolute;
+	top: 1%;
+	left: 50%;
+	margin-top: 210px;
+	margin-top: 210px;
+	transform: translate(-50%,-50%);
+	text-align:center;
+	font-weight: bold;
+	width: 100%;
+	
 }
 
 /** search html search table, bar and button**/
@@ -119,6 +129,10 @@ img{
 	left: 50%;
 	margin-top: 215px;
 	transform: translate(-50%,-50%);
+}
+
+#searchtable td{
+	font-size: 20px;
 }
 
 .search-text{
