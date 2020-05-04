@@ -91,7 +91,7 @@ def getEntry(accession, rez = ''):
     
     Return:
     {'gene_id' : 'XXX', 'accession': 'XXX','product' : 'XXX','location' : 'XXX', 
-    'protein_seq': 'xxx', 'dna_seq': '<mark>xx><span class = "re">&starf;</span>x</mark>', 
+    'protein_seq': 'xxx', 'dna_seq': '[xx|x]', 
     'cds':'xxx','codon_freq':{'AAA':'0'..'GGG':'0'}, 'total_codon_freq':{'AAA': '0'..'GGG':'0'}}
         
     '''
@@ -141,7 +141,6 @@ def getEntry(accession, rez = ''):
     for start,end in cds_pairs:
         start = start-1         
         cds_in_dna += dna_seq[start:end]
-#        dna_seq = dna_seq[:start]+ '<mark>' + dna_seq[start:end].lower() + '</mark>' + dna_seq[end:]
         dna_seq = dna_seq[:start]+ '[' + dna_seq[start:end].lower() + ']' + dna_seq[end:]
        
 #adding tags for restriction enzymes
@@ -168,7 +167,7 @@ def getEntry(accession, rez = ''):
         dna_seq = dna_seq.replace('TGGCCA', 'TGG|CCA')  
       
     dna_seq = dna_seq.upper()
-#    dna_seq = dna_seq.replace('|', '<span class = "re">&starf;</span>')
+    
 #calculating cds codon frequency
         
     codon_in_gene = []        
