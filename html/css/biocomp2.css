@@ -1,7 +1,18 @@
+/** All pages: navigation, logo, html, body **/
+
 *{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+html, body{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	font-family: 'montserret', sans-serif;
+	background:  	#f1f2f6;
 }
 
 nav{
@@ -11,20 +22,19 @@ nav{
 	min-height: 80px;
 	background-color: #122335;
 	font-family: 'Poppins', sans-serif;
-
 }
 
 .logo{
 	color: white;
 	text-transform: uppercase;
 	letter-spacing: 5px;
-	font-size: 18px
-
+	width: 32%;
 }
+
  .nav-links{
 	 display: flex;
 	 justify-content: space-around;
-	 width: 32%;
+	 width:35%;
  }
 
  .nav-links a{
@@ -36,8 +46,8 @@ nav{
 	 text-transform: uppercase;
 	 border-radius: 8px;
 	 padding: 10px 20px;
-
  }
+
 .nav-links li{
 	list-style: none;
 }
@@ -48,33 +58,96 @@ nav{
 	transform: scale(1.1);
 }
 
-body{
-	margin: 0;
-	padding: 0;
-	font-family: 'montserret', sans-serif;
-	background:  	#f1f2f6;
-}
 
-h2{
+
+/*********************************************************************************************************************
+    INDEX HTML PAGE
+**********************************************************************************************************************/
+
+
+/**  index page**/
+
+.title{
 	color: white;
-	font-size: 80px;
+	font-size: 70px;
 	text-transform: uppercase;
 	letter-spacing: 20px;
-	font-weight: 500;
 	position: absolute;
-	top: 30%;
+	top: 10%;
 	left: 50%;
+	margin-top: 215px;
 	transform: translate(-50%,-50%);
+	text-align:center;
+	font-weight: bold;
+	width: 100%;
 }
+
+
+/** index page image**/
 
 .img-container {
 	width: 100%;
-	height: 40%;
+	height: 100%;
 }
 
 img{
 	width: 100%;
+	height:100%;
 }
+
+
+
+/*********************************************************************************************************************
+    SEARCH HTML PAGE
+**********************************************************************************************************************/
+
+/** search html**/
+
+.search-by{
+	font-family: 'Poppins', sans-serif;
+	font-size: 200%;
+	text-transform: uppercase;
+	position: absolute;
+}
+
+/** search html search table, bar and button**/
+
+#searchtable{
+	width:70%;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-top: 215px;
+	transform: translate(-50%,-50%);
+}
+
+.search-text{
+	width: 90%;
+  	border: 0px;
+	height: 40px;
+ 	padding: 0px 35px;
+  	border-radius: 50px;
+  	outline: none;
+  	color: #42be11;
+	color: white;
+	font-weight: bold;
+	background: #122335;
+}
+
+
+.submitbtn{
+	position: fixed;
+	top: 90%;
+	left: 80%;
+	transform: translate(-50%,-50%);
+}
+
+
+
+
+/*********************************************************************************************************************
+    LISTALL.PY PAGE
+**********************************************************************************************************************/
 
 
 /*Table styling for listall.py */
@@ -82,12 +155,9 @@ h3{
 	font-family: 'Poppins', sans-serif;
 	font-size:50px;
 	left: 50%;
-
 }
 
 table{
-
-	width:100%;
 	border: 1px solid black;
 	border-collapse: collapse;
 	font-size: 14px;
@@ -96,12 +166,10 @@ table{
 }
 
 th, td {
-
 	border: 1px white;
 	padding: 15px;
 	text-align: left;
 	font-family: 'Poppins', sans-serif;
-	
 }
 
 table tr:nth-child(even){
@@ -119,19 +187,7 @@ table tr:nth-child(odd){
 	text-transform: uppercase;
 }
 
-.detail {
-
-	width:80%;
-	
-}
-
-.reztable {
-
-	width:15%;
-	
-}
-
-
+/** listall.py heading**/
 
 h3 {
 	font-family: 'Poppins', sans-serif;
@@ -139,7 +195,47 @@ h3 {
 	text-transform: uppercase;
 	padding: 40px;
 }
-	
+
+/** listall.py whole page **/
+.summary-page{
+	margin-left: 80px;
+}
+
+
+
+
+/*********************************************************************************************************************
+    SEARCH.PY PAGE
+**********************************************************************************************************************/
+
+/** Search.py page**/
+
+.page {
+	padding:40px;
+}
+
+/** search.py tables: detail table, restriction enzyme table, codon table**/
+
+.detail {
+	width:80%;
+}
+
+.reztable {
+	width:15%;
+}
+
+.codon{
+	width:25%;
+}
+
+/** search.py table width**/
+
+.summary {
+	width:90%;
+}
+
+
+/** search.py heading for detail table**/
 
 .detail-heading {
 	font-family: 'Poppins', sans-serif;
@@ -147,42 +243,46 @@ h3 {
 	text-transform: uppercase;
 	margin-left: 40px;
 	margin-top: 40px;
-
 }
 
-#number {
+/** search.py dna info points**/
+.info{
 	font-family: 'Poppins', sans-serif;
-	font-size: 180%;
+	font-size: 80%;
+	margin-top :10px;
+	margin-bottom :25px;
+
 }
 
+/** search.py restriction enzyme dropdown **/
+.dropdown{
+	margin-bottom :10px;
+	font-weight: bold;
+	margin-right:450px;
+	display: inline-block;
+}
+
+/** search.py restriction enzyme info: tells what restrction enzyme was searched**/
+
+.rezinfo{
+	font-family: 'Poppins', sans-serif;
+	font-size: 90%;
+	font-weight: bold;
+}
+
+
+/** search.py dna sequence**/
 
 #dna-seq{
 	height: auto;
-	width:1520px;
+	margin-top :30px;
+	margin-bottom :50px;
+	width:auto;
 	font-size: 11px;
-        word-wrap:break-word;
+   	word-wrap:break-word;
 }
 
-.summary {
-	width:90%;
-	
-}
-
-}
-
-.codon{
-	width:25%;
-}
-
-p{
-	font-family: 'Poppins', sans-serif;
-	font-size: 200%;
-	text-transform: uppercase;
-}
-
-.page {
-	padding:40px;
-}
+/** search.py headings on this page**/
 
 .table-heading {
 	margin-top: 20px;
@@ -190,25 +290,3 @@ p{
 	font-size: 120%;
 	font-family: 'Poppins', sans-serif;
 }
-
-.summary-page{
-
-	margin-left: 80px;
-}
-
-p1{
-	font-family: 'Poppins', sans-serif;
-	font-size: 80%;
-	margin-top :10px;
-}
-
-.codondiv {
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-}
-
-.hiddenrow {
-    visibility: hidden !important;
-}
-
