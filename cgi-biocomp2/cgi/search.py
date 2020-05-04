@@ -3,7 +3,7 @@
 Program:    Search CGi Script
 File:       search.py
 
-Version:    V8.0
+Version:    V9.0
 Date:       04.05.2020
 Function:   Obtains accession and rez entries from the BL layer and formats them for 
 	    HTML display.
@@ -37,7 +37,8 @@ V4.0   	16.04.2020
 V5.0   	17.04.2020   
 V6.0   	18.04.2020     
 V7.0   	02.05.2020
-V8.0    04.05.2020      
+V8.0    04.05.2020
+V9.0    04.05.2020         
 
 
 """
@@ -116,8 +117,12 @@ html += "<textarea class ='amino-acid' readonly cols='45' rows='10'>" +entry['pr
 
 #******************************************************************************************************************************************************************
 
+# Heading for table and sequences 
 
 html += "<h4 class= 'table-heading' >DNA Sequence: </h4>\n"
+
+# Information section and form get method
+
 html += "<div class = 'info'> Coding region has been highlighted.\n"
 html += "<ul>\n"
 html += "<li>By choosing a Retriction Enzyme, a star will appear in the DNA sequence below</li>\n"
