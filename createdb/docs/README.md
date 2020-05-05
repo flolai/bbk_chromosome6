@@ -40,17 +40,19 @@ dna_seq	MEDIUMTEXT NOT NULL,
 PRIMARY KEY (accession)  
 );  
 	
-Once data has been loaded into table add index with below statement:
+Once data has been loaded into table add index to accession with below statement:
 
 CREATE INDEX accession_IDX ON chrom6 (accession);  
 
 Index added on accession as likely to be the most frequently searched on field as search tables provide the option to click through on accession to get full entry details. 
 
+Accession is the genbank unique identifier so was used as the primary key. 
+
 
 #### Load Data Statement
-Update below system path (in italics) with location of data created by the parser  
+To load genbank data update below system path (in italics) with location of data created by the parser and run command in SQL
 
 LOAD DATA INFILE *'/d/user6/co001/Desktop/BIOCOMP/mysql_data5.txt'*  
 INTO TABLE chrom6  
 FIELDS TERMINATED BY ',' ENCLOSED BY '\''  
-LINES TERMINATED BY ']' STARTING BY '['  
+LINES TERMINATED BY ']' STARTING BY '[';
