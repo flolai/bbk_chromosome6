@@ -113,7 +113,7 @@ for i in record:
               
 # write data to text file "chrom_6_data"
 
-with open('mysql_data.txt', 'w') as f:
+with open('chrom6_data.txt', 'w') as f:
     for item in chrom_6_data:
         f.write("%s\n" % item)
 
