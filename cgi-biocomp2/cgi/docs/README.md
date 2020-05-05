@@ -113,6 +113,16 @@ entry = blapi.getEntry(accession, rez)
 
 
 
+## semantic markup used
+   
+  * <mark>
+  * <nav>
+  * <div>
+  * <header>
+  * <footer>
+  
+   
+
 
 
 
