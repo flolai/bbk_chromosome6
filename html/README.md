@@ -23,6 +23,7 @@ This is search HTML page of the genome browser. The navigation at the top helps 
 
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/searchhtml.png)
 
+
 As GenBank Accession is unique only one entry will be returned in the table format, whereas the others can return one or more in a table.
 
 * One entry returned when GenBank Accession used to search:
@@ -30,6 +31,13 @@ As GenBank Accession is unique only one entry will be returned in the table form
 
 * Two entries returned when GenBank Accession used to search:
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/twoentries.png)
+
+### Gene summary page
+
+This is the gene summary page, where the all of the genes in chromosome 6 are in a table.
+By selecting a GenBank Accession hyperlink, you will be taken to the detail page
+
+![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/gene%20summary.png)
 
 ### Detail page
 
