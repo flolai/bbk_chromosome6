@@ -19,10 +19,15 @@ This program is released under the GNU Public Licence (GPL V3)
 --------------------------------------------------------------------------
 Description:
 ============
-This program takes Genbank accession number from the front end and pass it
-to the database layer for Genbank data query. Relavent information like protein
-sequence and dna sequence with coding region ready to be highlighted by the
-front end. 
+This program is the business layer of the Genbank Browser for Chromosome 6.
+
+The business layer is used to interface between the web front end the database
+layer back-end for Genbank data query.
+
+The functions here calls the backend to retrieve data according to the input,
+and relavent information like protein sequence and dna sequence are passed
+back with additional processing done to mark the coding region(s) and
+restriction enzymes for highlighting by the front end. 
 
 """
 
@@ -43,18 +48,20 @@ from config import total_codon_freq
 
 def getAllEntries(accession = None, gene_id = None, product = None, location = None):
     '''
-    function to return all entries from database which contains chromosome 6
-    data from Genbank to the front end
+    function to return all entries matching the parameters from the database  
+    containing chromosome 6 data from Genbank (to the front end)
     
     Input: All of the following parameters.
     accession: Genbank accession number
     gene_id: Gene identifier
     product: protein product name
     location: chromasomal location
-    If none was returned, full database information for chromasome 6 
-    will return to front page.
+    If no input (None) for a parameter, all records are matched for that
+    parameter.
+    If no input is given for all parameters, then all records from
+    chromasome 6 will be returned.
     
-    Return: [{'gene_id' : 'XXX', 'accession': 'XXX','product' :'XXX','location' :' XXX'}]
+    Return: [{'gene_id' : 'XXX', 'accession': 'XXX','product' :'XXX','location' :' XXX'}, ...]
     -- A list of dictionaries containing Genbank accession numbers, Gene identifiers,
        protein product names adn chromosomal locations within chromosome 6
     
@@ -67,16 +74,16 @@ def getAllEntries(accession = None, gene_id = None, product = None, location = N
 def getEntry(accession, rez = ''): 
     rez = '' if rez == None else rez
     '''
-    This function will first taking accession number from 
-    the front end. After processing, this function will return Genbank 
-    accession numbers, Gene identifiers, protein product names and chromosomal 
-    locations within chromosome 6.
-    Additionally, the coding region will be marked with tags for highlighting. 
+    This function will take an accession number from the caller.
+    After processing, this function will return Genbank accession numbers,
+    Gene identifiers, protein product names and chromosomal locations for
+    a specific record matching the accession number in chromosome 6.
+    Additionally, the coding region will be marked with tokens for highlighting. 
     The codon usage frequency of that gene together with the total codon usage 
-    frequenceof chromsome 6 will also be returned.
-    Should the user of the browser selected the choice of restriction enzymes
-    available, the DNA sequence will then be further processed and return
-    the same DNA sequence with restriction enzyme marked with star.
+    frequency of chromsome 6 will also be returned.
+    Should the caller select one of the restriction enzymes available,
+    the DNA sequence will then be further processed and return
+    the same DNA sequence with the cut by the restriction enzyme marked.
     
     Input:
     accession: Genbank accession number

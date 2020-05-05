@@ -20,7 +20,7 @@ Description:
 ============
 Parsing of Genbank DNA sequence from 'ORIGIN' section of the 
 Genbank record and using this information to calculate the usage
-of codon in chromosome 6.
+of total codon frequency in chromosome 6.
  
 
 '''
