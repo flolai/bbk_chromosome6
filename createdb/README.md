@@ -1,6 +1,8 @@
 Biocomputing II / createdb
 ==========================
 
+# Parser Documenation 
+
 This directory contains the parser to populate the database from the
 provided Genbank file. Program originally written by Florence to calculate codon frequency.  Edited by 
 Oliver Cant to parse genebank data. 
