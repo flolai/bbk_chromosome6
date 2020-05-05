@@ -50,9 +50,12 @@ Accession is the genbank unique identifier so was used as the primary key.
 
 
 #### Load Data Statement
+
 To load genbank data update below system path (in italics) with location of data created by the parser and run command in SQL
 
 LOAD DATA INFILE *'/d/user6/co001/Desktop/BIOCOMP/mysql_data5.txt'*  
 INTO TABLE chrom6  
 FIELDS TERMINATED BY ',' ENCLOSED BY '\''  
 LINES TERMINATED BY ']' STARTING BY '[';
+
+The parser outputs the genbank data as a list of lists as a text file with each item ended with a comma and enclosed by a single quote. Each list is delimited with square brackets. Therefore fields and lines terminated are used in the command to ensure these are not included in the database and the load runs correctly. 
