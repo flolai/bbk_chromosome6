@@ -48,7 +48,7 @@ Index added on accession as likely to be the most frequently searched on field a
 
 
 #### Load Data Statement
-Updated below system path (in italics) with location of data created by the parser  
+Update below system path (in italics) with location of data created by the parser  
 
 LOAD DATA INFILE *'/d/user6/co001/Desktop/BIOCOMP/mysql_data5.txt'*  
 INTO TABLE chrom6  
