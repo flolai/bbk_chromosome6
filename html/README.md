@@ -1,7 +1,11 @@
 Biocomputing II / html
 ======================
 
-This directory contains only the HTML file for the initial view of the
-database.
+This directory contains only the HTML files.
 
-There would be an `html2` directory if there is an alternative front end.
+###Index page and Navigation
+This is the front page of the genome broswer. At the top there is a naviagtion bar, this helps you navigate through the browser.
+Naviagtion bar includes:
+Home
+Search
+Gene summary
