@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """
-Program:    Search CGi Script
+Program:    Search CGI Script
 File:       search.py
 
 Version:    V9.0
-Date:       04.05.2020
+Date:       05.05.2020
 Function:   Obtains accession and rez entries from the BL layer and formats them for 
 	    HTML display.
 
@@ -18,12 +18,12 @@ This program is released under the GNU Public Licence (GPL V3)
 Description:
 ============
 This CGI script  displays the search results - a detailed page of the gene that is searched
-using Genbank Accession, Gene Identifier, Protein Product or Chromosomal Location.
+using GenBank Accession, Gene Identifier, Protein Product or Chromosomal Location.
 
 Detail page includes:
 =====================
 
-Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal
+GenBank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal
 Location, Coding region-CDS, DNA sequence-with coding regions highlighted and star
 indicating where the restriction enzyme cuts and codon frequencies.
 
@@ -43,6 +43,7 @@ V9.0    04.05.2020
 
 """
 #******************************************************************************************************************************************************************
+
 import cgi 
 
 # Add the bl sub-directory to the module path
