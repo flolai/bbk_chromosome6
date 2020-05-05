@@ -1,3 +1,5 @@
+# Database Documenation
+
 This readme contains information on how to populate the MySQL database
 
 #### Logical Schema
