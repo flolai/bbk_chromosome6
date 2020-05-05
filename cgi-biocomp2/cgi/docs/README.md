@@ -50,7 +50,10 @@ html += "</table><!-- end of summary table -->\n"
 ```
 
 Listall CGI call tree:
-
+function:
+```sh
+entries = blapi.getAllEntries(accession = accession, gene_id = gene_id, product = product, location = location)
+```
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/cgi-biocomp2/cgi/docs/listall.py%20call%20tree.png)
 
 
@@ -66,8 +69,6 @@ enzyme = form.getvalue("rez")
 entry = blapi.getEntry(accession, enzyme)
 ```
 form.getvalue and getEntry has been used in this CGI script 
-
-On the detail page (search.py) of the chosen GenBank Accession by user, the restriction enzyme be chosen by the dropdown menu. The restriction enzyme chosen may be used to cut the gene at specific location. 
 
 A form and get method is used
 
@@ -94,6 +95,24 @@ html += "<input type = 'submit' value = 'Submit'/>\n"
 html += "</div>\n"
 html += "</form>\n"
 ```
+
+* On the detail page (search.py) of the chosen GenBank Accession by user, the restriction enzyme be chosen by the dropdown menu. The restriction enzyme chosen may be used to cut the gene at specific location. 
+
+* Restriction enzyme which is returned as a string is passed to this function, def getEntry(accession, rez = ''), used in BLAPI, the DNA sequence is processed and location of the cutting site will be pre-tagged with | and returned back to the front end for display.
+
 Search CGI call tree:
 
+Function:
+
+```sh
+entry = blapi.getEntry(accession, rez)
+
+```
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/cgi-biocomp2/cgi/docs/search.py%20call%20tree.png)
+
+
+
+
+
+
+
