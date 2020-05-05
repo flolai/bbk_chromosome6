@@ -32,7 +32,7 @@ Product – Commas are removed from this field by the parser as they are used as
 #### Running the parser 
 1.	Genbank data was downloaded from:  
 http://www.bioinf.org.uk/teaching/bbk/biocomp2/project/data/chrom_CDS_6.gz  
-2.	Update parser with system path with file location from Genbank data  
+2.	Update line 36 of the parser with the system path of Genbank data  
 3.	Run parser in python, this will generate the following text file “chrom6_data.txt” which contains data to be uploaded to MySQL Database  
 
 
