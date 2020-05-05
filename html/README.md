@@ -1,7 +1,7 @@
 Biocomputing II / html
 ======================
 
-This directory contains only the HTML files.
+This directory contains HTML files.
 
 ### Index page and Navigation
 
