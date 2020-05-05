@@ -50,7 +50,8 @@ Detail page includes:
 * **Amino Acid sequence**
 * **Chromosomal Location**
 * **Coding region-CDS**
-* **DNA sequence-with coding regions highlighted and star indicating where the restriction enzyme cuts**
+* **DNA sequence-with coding regions highlighted
+* **Dropdown menu to search where the restriction enzyme cuts, a star or stars are used to indicated this on the DNA Sequence**
 * **Codon usage frequencies in the chosen gene and in Chromosome 6**
 
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/detailpage.png)
