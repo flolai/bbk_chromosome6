@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Program:    List all CGi Script
+Program:    List all CGI Script
 File:       listall.py
 
 Version:    V9.0
-Date:       04.05.2020
+Date:       05.05.2020
 Function:   Obtains entries from the BL layer and formats them for 
 	    HTML display as a table.
 
@@ -17,17 +17,17 @@ This program is released under the GNU Public Licence (GPL V3)
 ============
 Description:
 ============
-This CGI script  displays a summary table when Genbank Accession, Gene Identifier,
+This CGI script  displays a summary table when GenBank Accession, Gene Identifier,
 Protein product or chromosomal location is searched on search html page. This CGI 
 script also displays summary table of all the genes in chromosome 6, when on the 
-gene summary page, with Genbank Accession, Gene Identifier, Protein product and
+gene summary page, with GenBank Accession, Gene Identifier, Protein product and
 chromosomal location being the column headers. 
 
-As Genbank Accession is unique, one entry in a table will be returned whereas for 
+As GenBank Accession is unique, one entry in a table will be returned whereas for 
 Gene Identifier, Protein product or chromosomal location one or more entries in a table
-can be returned. This CGI script also allows users to select any Genbank Accession cell
+can be returned. This CGI script also allows users to select any GenBank Accession cell
 which will take user to detail page of that gene; detail page will display
-Genbank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal
+GenBank Accession, Gene Identifier, Protein Product, Amino Acid sequence, Chromosomal
 Location, Coding region-CDS, DNA sequences-with coding regions highlighted and star 
 indicating restriction enzyme cutting site and codon frequencies.
 
@@ -44,6 +44,8 @@ V6.0   	18.04.2020
 V7.0   	19.04.2020   
 V8.0   	02.05.2020  
 V9.0   	04.05.2020      
+
+   
 
 """
 #******************************************************************************************************************************************************************
