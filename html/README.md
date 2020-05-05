@@ -7,15 +7,18 @@ This directory contains only the HTML files.
 
 This is the front page of the genome browser. At the top there is a navigation bar, this helps you navigate through the browser.
 Navigation bar includes:
+
 * **Home**
 * **Search**
 * **Gene summary**
 
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/frontpage.png)
 
+
 ### Search HTML page
 
 This is search HTML page of the genome browser. The navigation at the top helps you user to navigate through the browser. You can search by:
+
 * **Gene Identifier**
 * **Chromosomal location**
 * **Protein Product**
@@ -27,10 +30,14 @@ This is search HTML page of the genome browser. The navigation at the top helps 
 As GenBank Accession is unique only one entry will be returned in the table format, whereas the others can return one or more in a table.
 
 * One entry returned when GenBank Accession used to search:
+
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/oneentry.png)
 
+
 * Two entries returned when GenBank Accession used to search:
+
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/twoentries.png)
+
 
 ### Gene summary page
 
@@ -39,11 +46,13 @@ By selecting a GenBank Accession hyperlink, you will be taken to the detail page
 
 ![image](https://github.com/flolai/bbk_chromosome6/blob/master/html/gene%20summary.png)
 
+
 ### Detail page
 
 This is the detail page of the gene when you select GenBank Accession hyperlink; either when you search it and a table is displayed or when you click on the gene summary page and all the genes in Chromosome 6 are displayed in a table.
 
 Detail page includes:
+
 * **GenBank Accession**
 * **Gene Identifier**
 * **Protein Product**
